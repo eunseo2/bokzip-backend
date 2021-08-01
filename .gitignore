@@ -37,4 +37,4 @@ out/
 .vscode/
 
 ### db config
-resources/application.properties
+src/main/resources/application.properties
