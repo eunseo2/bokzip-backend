@@ -7,7 +7,7 @@ import javax.persistence.*;
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO) // @brief : PK, auto_increment
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // @brief : PK, auto_increment
     private Long uid; // @param : user id
 
     @OneToOne // 1:1

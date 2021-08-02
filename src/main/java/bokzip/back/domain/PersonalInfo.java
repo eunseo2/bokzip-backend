@@ -8,7 +8,7 @@ import java.util.List;
 public class PersonalInfo {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO) // @brief : PK, auto_increment
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // @brief : PK, auto_increment
     private Long pid; // @param : personal_info id
 
     @OneToMany(mappedBy = "uid") // 1:n //@TODO : users 테이블 기준으로 1:n
