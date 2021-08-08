@@ -1,5 +1,6 @@
 package bokzip.back.domain;
 
+import lombok.Data;
 import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
@@ -7,6 +8,8 @@ import java.util.Date;
 
 @Entity
 @Table(name = "Posts")
+@Data
+
 public class Post {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,14 +23,32 @@ public class Post {
     private String thumbnail;
 
     //내용
-    @Column(length = 255)
+    @Column(columnDefinition = "TEXT")
     private String description;
 
-    @Column
-    private String age;
+    //지원대상
+    @Column(columnDefinition = "TEXT")
+    private String target;
 
+    //선정기준
+    @Column(columnDefinition = "TEXT")
+    private String criteria;
+
+    //분야 or 지역
     @Column
     private String category;
+
+    //연락처
+    @Column
+    private String contact;
+
+    //신청주소
+    @Column(name = "apply_url")
+    private String applyUrl;
+
+
+    @Column(name = "how_to_apply")
+    private String howToApply;
 
     //조회수
     @Column(name = "view_count",columnDefinition = "integer default 0")
@@ -37,11 +58,7 @@ public class Post {
     @Column(name = "star_count",columnDefinition = "integer default 0")
     private Integer starCount;
 
-    //신청주소
-    @Column(name = "apply_url")
-    private String applyUrl;
-
     @CreatedDate
-    @Column(name = "created_date")
-    private Date createdDate;
+    @Column(name = "created_at")
+    private Date createdAt;
 }
