@@ -15,11 +15,11 @@ public class Post {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(length = 100)
+    @Column()
     private String title;
 
     //썸네일
-    @Column(length = 255)
+    @Column(columnDefinition = "TEXT")
     private String thumbnail;
 
     //내용
@@ -31,23 +31,23 @@ public class Post {
     private String target;
 
     //선정기준
-    @Column(columnDefinition = "TEXT")
+    @Column(columnDefinition = "TEXT",nullable = true)
     private String criteria;
 
     //분야 or 지역
-    @Column
+    @Column()
     private String category;
 
     //연락처
-    @Column
+    @Column(columnDefinition = "TEXT")
     private String contact;
 
     //신청주소
-    @Column(name = "apply_url")
+    @Column(columnDefinition = "TEXT",name = "apply_url")
     private String applyUrl;
 
 
-    @Column(name = "how_to_apply")
+    @Column(columnDefinition = "TEXT", name = "how_to_apply")
     private String howToApply;
 
     //조회수
@@ -58,7 +58,4 @@ public class Post {
     @Column(name = "star_count",columnDefinition = "integer default 0")
     private Integer starCount;
 
-    @CreatedDate
-    @Column(name = "created_at")
-    private Date createdAt;
 }
