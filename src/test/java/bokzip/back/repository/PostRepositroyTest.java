@@ -1,12 +1,12 @@
 package bokzip.back.repository;
 
 import bokzip.back.domain.Post;
+import bokzip.back.dto.HomeResponseDto;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.swing.text.html.Option;
 import java.util.List;
 import java.util.Optional;
 
@@ -46,7 +46,7 @@ public class PostRepositroyTest {
         String category = "생활지원";
 
         //when
-        List<Post> listResult = postRepository.findByCategory(category);
+        List<HomeResponseDto> listResult = postRepository.findByCategory(category);
 
         //then
         if(!listResult.isEmpty()){

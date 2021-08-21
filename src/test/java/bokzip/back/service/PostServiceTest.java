@@ -1,6 +1,7 @@
 package bokzip.back.service;
 
 import bokzip.back.domain.Post;
+import bokzip.back.dto.HomeResponseDto;
 import bokzip.back.repository.PostRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,8 +38,8 @@ public class PostServiceTest {
         //given
         String category = "생활지원";
 
-        //given, when
-        List<Post> listResult = postService.getListforCategory(category);
+        //when
+        List<HomeResponseDto> listResult = postService.getListforCategory(category);
 
         //then
         if(!listResult.isEmpty()){
