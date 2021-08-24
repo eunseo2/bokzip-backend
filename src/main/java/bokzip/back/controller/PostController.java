@@ -1,10 +1,9 @@
 package bokzip.back.controller;
 
 import bokzip.back.domain.Post;
-import bokzip.back.repository.PostRepository;
+import bokzip.back.dto.HomeResponseDto;
 import bokzip.back.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -37,8 +36,8 @@ public class PostController {
 
     //@param : 중앙부처 분야별 데이터 조회
     @GetMapping("/center/category/{category}")
-    public List<Post> getAllCategory(@PathVariable String category){
-        List<Post> categoryResult = new ArrayList<>();
+    public List<HomeResponseDto> getAllCategory(@PathVariable String category){
+        List<HomeResponseDto> categoryResult = new ArrayList<>();
 
         if(category != null)
             postService.getListforCategory(category).forEach(categoryResult::add);
