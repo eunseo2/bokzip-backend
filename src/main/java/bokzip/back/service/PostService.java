@@ -3,6 +3,7 @@ package bokzip.back.service;
 import bokzip.back.domain.Post;
 import bokzip.back.repository.PostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -29,7 +30,7 @@ public class PostService {
     }
 
     public List<Post> findAll(){
-        return postRepository.findAll();
+        return postRepository.findAll(Sort.by(Sort.Direction.ASC, "id"));
     }
 
     public List<Post> getListforCategory(String category){
