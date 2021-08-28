@@ -48,11 +48,11 @@ public class PostController{
 
         if(category != null)
             postService.getListforCategory(category).forEach(categoryResult::add);
-        else //null 값 반환 방지
-            throw new NullPointerException();
+        else //null 값 반환 방지 -> 임의로 nullpointerror 호출 시 customexception에서 낚아채지 않고 예외 발생 후 앱 종료
+            throw new CustomException();
 
         if(categoryResult.isEmpty()) //null 값 반환 방지
-            throw new NullPointerException();
+            throw new CustomException();
 
         return categoryResult;
     }

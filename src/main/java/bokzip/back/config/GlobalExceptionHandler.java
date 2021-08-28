@@ -1,7 +1,9 @@
 package bokzip.back.config;
 
 import lombok.extern.slf4j.Slf4j;
+import org.hibernate.service.NullServiceException;
 import org.springframework.beans.TypeMismatchException;
+import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.MissingServletRequestParameterException;
@@ -31,11 +33,11 @@ public class GlobalExceptionHandler {
     public static ResponseEntity BadRequestError(){
 //        logger.log(Level.INFO, "400 bad request", nve);
         ErrorCode errorCode = ErrorCode.INVALID_VALUE;
-        return new ResponseEntity<>(errorCode.getMsg(), errorCode.getHttpStatus());
+        return new ResponseEntity<>(ErrorResponse.res(errorCode.getMsg()), errorCode.getHttpStatus());
     }
 
     //404
-    @ExceptionHandler({NullPointerException.class, NoHandlerFoundException.class})
+    @ExceptionHandler({Exception.class, ChangeSetPersister.NotFoundException.class})
     public static ResponseEntity NotFoundError(){
 //        logger.log(Level.INFO, "404 not found", nfe);
         ErrorCode errorCode = ErrorCode.NO_DATA;
