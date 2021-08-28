@@ -1,4 +1,4 @@
-package bokzip.back.dto;
+package bokzip.back.config;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -16,5 +16,5 @@ public class ErrorResponse<T> {
                 .errorMessage(errorMessage)
                 .build();
     }
-
 }
+
