@@ -4,6 +4,7 @@ import bokzip.back.domain.Post;
 import bokzip.back.dto.HomeResponseDto;
 import bokzip.back.repository.PostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -29,7 +30,7 @@ public class PostService {
     }
 
     public List<Post> findAll(){
-        return postRepository.findAll();
+        return postRepository.findAll(Sort.by(Sort.Direction.ASC, "id"));
     }
 
     public List<HomeResponseDto> getListforCategory(String category){
