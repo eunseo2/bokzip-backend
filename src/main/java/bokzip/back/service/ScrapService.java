@@ -106,7 +106,7 @@ public class ScrapService {
 
 
     private Optional<Scrap> scrapPostCheck(User user, Optional<Post> post) {
-        var scrap = scrapRepository.findByUserAndPost(user, post.get());
+        Optional<Scrap> scrap = scrapRepository.findByUserAndPost(user, post.get());
         if (scrap.isPresent()) {
             throw new RuntimeException("이미 스크랩 했습니다.");
         }
@@ -114,7 +114,7 @@ public class ScrapService {
     }
 
     private Optional<Scrap> scrapGeneralCheck(User user, Optional<General> general) {
-        var scrap = scrapRepository.findByUserAndGeneral(user, general.get());
+        Optional<Scrap> scrap = scrapRepository.findByUserAndGeneral(user, general.get());
         if (scrap.isPresent()) {
             throw new RuntimeException("이미 스크랩 했습니다.");
         }
