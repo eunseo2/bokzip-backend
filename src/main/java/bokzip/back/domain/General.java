@@ -28,4 +28,8 @@ public class General {
     //이미지
     @Column(columnDefinition = "TEXT")
     private String image;
+
+    //스크랩 수
+    @Column(name = "star_count",columnDefinition = "integer default 0")
+    private Integer starCount;
 }
