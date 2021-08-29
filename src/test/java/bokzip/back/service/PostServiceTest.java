@@ -24,7 +24,7 @@ public class PostServiceTest {
         //Post post = new Post();
 
         //given, when
-        Optional<Post> post = postService.findId(1L);
+        Optional<Post> post = postService.findId(10000L);
 
         //then
         post.ifPresent(selectPost ->{
@@ -36,7 +36,7 @@ public class PostServiceTest {
     @Test
     public void 중앙부처카테고리조회(){
         //given
-        String category = "생활지원";
+        String category = "1";
 
         //when
         List<HomeResponseDto> listResult = postService.getListforCategory(category);
