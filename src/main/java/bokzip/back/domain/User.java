@@ -1,104 +1,66 @@
 package bokzip.back.domain;
 
+import lombok.Data;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name = "Users")
+@Data
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) // @brief : PK, auto_increment
-    private Long uid; // @param : user id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="user_id")
+    private Long id;
 
-    @OneToOne // 1:1
-    @JoinColumn(name = "pid_fk") // @param : personal_info id (fk)
-    private PersonalInfo pid; //
-
-    // @brief : @Column 매핑을 생략하면 필드명을 사용해서 매핑. 필드명과 데이터필드명을 동일하게 설정하여 명시적 매핑 X
-
+    // 소셜 로그인 email
     @Column(nullable = false)
-    private String email; // @param : 소셜 로그인 email
+    private String email;
 
+    //소셜로그인 이름
     @Column(nullable = false)
-    private String passwd; // @param : 소셜 로그인 pw // @TODO : OAuth 인증 db 찾아보고 수정 필요 없애던가 말던가
+    private String name;
 
+    //소셜로그인 프로필사진
     @Column(nullable = false)
-    private String name; // @param : 소셜로그인 이름
+    private String profile;
 
-    @Column(nullable = false)
-    private String profile; // @param : 소셜로그인 프로필사진
+    //거주지 정보
+    @Column
+    private String address;
 
-    private String access_token; // @param : JWT 액세스 토큰 // @TODO : 회의 후 db에 보관할지(서버사이드), 세션에 저장할지
+    //관심주제
+    @Column(length = 128)
+    private String category;
 
-    private String refresh_token; // @param : JWT 리프레시 토큰  // @TODO : 회의 후 db에 보관할지(서버사이드), 세션에 저장할지
-
-    // @brief : 각 필드의 getter, setter
-    public Long getUid() {
-        return uid;
-    }
-
-    public void setUid(Long uid) {
-        this.uid = uid;
-    }
-
-    public PersonalInfo getPid() {
-        return pid;
-    }
-
-    public void setPid(PersonalInfo pid) {
-        this.pid = pid;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPasswd() {
-        return passwd;
-    }
-
-    public void setPasswd(String passwd) {
-        this.passwd = passwd;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getProfile() {
-        return profile;
-    }
-
-    public void setProfile(String profile) {
-        this.profile = profile;
-    }
-
-    public String getAccess_token() {
-        return access_token;
-    }
-
-    public void setAccess_token(String access_token) {
-        this.access_token = access_token;
-    }
-
-    public String getRefresh_token() {
-        return refresh_token;
-    }
-
-    public void setRefresh_token(String refresh_token) {
-        this.refresh_token = refresh_token;
-    }
-
-    @Override
-    public String toString() {
-        return super.toString();
-    }
+//    // @see : 구글, 카카오 소셜로그인을 위해 생성
+//    @Enumerated(EnumType.STRING)
+//    @Column(nullable = false)
+//    private Role role;
+//
+//    /**
+//     * @see : No default constructor for entity 에러 해결을 위해 기본 생성자 생성
+//     *        (JPA 2.0 표준 스펙에 반드시 기본 생성자가 있어야 한다고 함)
+//     */
+//    public User(){
+//    }
+//
+//    @Builder
+//    public User(String email, String name, String profile, Role role){
+//        this.email = email;
+//        this.name = name;
+//        this.profile = profile;
+//        this.role = role;
+//    }
+//
+//    public User update(String name, String profile){
+//        this.name = name;
+//        this.profile = profile;
+//        return this;
+//    }
+//
+//    public String getRoleKey(){
+//        return this.role.getKey();
+//    }
 }
