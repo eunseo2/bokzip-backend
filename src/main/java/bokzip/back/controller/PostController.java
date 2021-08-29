@@ -5,7 +5,6 @@ import bokzip.back.config.GlobalExceptionHandler;
 import bokzip.back.domain.Post;
 import bokzip.back.dto.HomeResponseDto;
 import bokzip.back.service.PostService;
-import com.sun.tools.javac.main.Option;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
