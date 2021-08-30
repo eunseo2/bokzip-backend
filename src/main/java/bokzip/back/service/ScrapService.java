@@ -40,7 +40,7 @@ public class ScrapService {
 
         Scrap scrap;
         User user = new User();
-        user.setId(1L);
+        user.setId(2L);
 
 
         if (type == ScrapType.POST) {
@@ -80,7 +80,7 @@ public class ScrapService {
         Optional<General> getGeneral = null;
 
         User user = new User();
-        user.setId(1L);
+        user.setId(2L);
 
 
         if (type == ScrapType.POST) {
@@ -108,7 +108,7 @@ public class ScrapService {
     private Optional<Scrap> scrapPostCheck(User user, Optional<Post> post) {
         Optional<Scrap> scrap = scrapRepository.findByUserAndPost(user, post.get());
         if (scrap.isPresent()) {
-            throw new RuntimeException("이미 스크랩 했습니다.");
+            throw new RuntimeException("409");
         }
         return scrap;
     }
@@ -116,7 +116,7 @@ public class ScrapService {
     private Optional<Scrap> scrapGeneralCheck(User user, Optional<General> general) {
         Optional<Scrap> scrap = scrapRepository.findByUserAndGeneral(user, general.get());
         if (scrap.isPresent()) {
-            throw new RuntimeException("이미 스크랩 했습니다.");
+            throw new RuntimeException("409");
         }
         return scrap;
 
@@ -125,7 +125,7 @@ public class ScrapService {
 
     public List<ScrapMapping> Scraps() {
         User user = new User();
-        user.setId(1L);
+        user.setId(2L);
         return scrapRepository.findByUser(user);
     }
 
