@@ -1,7 +1,7 @@
 package bokzip.back.repository;
 
 import bokzip.back.domain.Post;
-import bokzip.back.dto.HomeMapping;
+import bokzip.back.dto.PostMapping;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.query.Param;
@@ -20,7 +20,7 @@ public interface PostRepository extends JpaRepository<Post, Long> {
      *                   https://ppomelo.tistory.com/155?category=908484
      */
 
-    List<HomeMapping> findByCategoryLike(@Param("category")String category);
+    List<PostMapping> findByCategoryLike(@Param("category")String category);
 
-    List<HomeMapping> findAllBy(Sort id);
+    List<PostMapping> findAllBy(Sort id);
 }
