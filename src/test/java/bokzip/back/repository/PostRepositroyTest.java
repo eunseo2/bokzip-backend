@@ -1,10 +1,11 @@
 package bokzip.back.repository;
 
 import bokzip.back.domain.Post;
-import bokzip.back.dto.HomeResponseDto;
+import bokzip.back.dto.HomeMapping;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Sort;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -31,7 +32,7 @@ public class PostRepositroyTest {
     @Test
     public void 중앙부처전체데이터조회(){
         //given, when
-        List<Post> post = postRepository.findAll();
+        List<HomeMapping> post = postRepository.findAllBy(Sort.by(Sort.Direction.ASC, "id"));
 
         //then
         if(!post.isEmpty())
@@ -43,10 +44,10 @@ public class PostRepositroyTest {
     @Test
     public void 중앙부처_카테고리에_해당하는_데이터조회(){
         //given
-        String category = "생활지원";
+        String category = "%지원";
 
         //when
-        List<HomeResponseDto> listResult = postRepository.findByCategory(category);
+        List<HomeMapping> listResult = postRepository.findByCategoryLike(category);
 
         //then
         if(!listResult.isEmpty()){

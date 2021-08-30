@@ -1,7 +1,11 @@
 package bokzip.back.controller;
 
+import bokzip.back.config.ErrorResponse;
+import bokzip.back.config.SuccessResponse;
 import bokzip.back.dto.ScrapMapping;
 import bokzip.back.service.ScrapService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,32 +20,41 @@ public class ScrapController {
     }
 
     @PostMapping("/center/{postId}")
-    public String addPostScrap(@PathVariable Long postId) {
+    public ResponseEntity addPostScrap(@PathVariable Long postId) {
         scrapService.addPostScrap(postId);
-        return "스크랩 되었습니다.";
+        return new ResponseEntity<>(SuccessResponse.res("스크랩 되었습니다."), HttpStatus.OK);
+//        return "스크랩 되었습니다.";
     }
 
     @PostMapping("/general/{generalId}")
-    public String addGeneralScrap(@PathVariable Long generalId) {
+    public ResponseEntity addGeneralScrap(@PathVariable Long generalId) {
         scrapService.addGeneralScrap(generalId);
-        return "스크랩 되었습니다.";
+        return new ResponseEntity<>(SuccessResponse.res("스크랩 되었습니다."), HttpStatus.OK);
+//        return "스크랩 되었습니다.";
     }
 
 
     @DeleteMapping("/center/{postId}")
-    public String deletePostScrap(@PathVariable Long postId) {
+    public ResponseEntity deletePostScrap(@PathVariable Long postId) {
         scrapService.deletePostScrap(postId);
-        return "스크랩 해제되었습니다.";
+        return new ResponseEntity<>(SuccessResponse.res("스크랩 해제되었습니다."), HttpStatus.OK);
+//        return ResponseEntity.ok().body("스크랩 해제되었습니다.");
     }
 
     @DeleteMapping("/general/{generalId}")
-    public String deleteGeneralScrap(@PathVariable Long generalId) {
+    public ResponseEntity deleteGeneralScrap(@PathVariable Long generalId) {
         scrapService.deleteGeneralScrap(generalId);
-        return "스크랩 해제되었습니다.";
+        return new ResponseEntity<>(SuccessResponse.res("스크랩 해제되었습니다."), HttpStatus.OK);
+//        return ResponseEntity.ok().body("스크랩 해제되었습니다.");
     }
 
     @GetMapping("/scraps")
     public List<ScrapMapping> scraps() {
-        return scrapService.Scraps();
+        List<ScrapMapping> scrap_list = scrapService.Scraps();
+
+        if(scrap_list.isEmpty())
+            throw new RuntimeException("404");
+
+        return scrap_list;
     }
 }

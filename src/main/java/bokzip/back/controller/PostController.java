@@ -1,11 +1,8 @@
 package bokzip.back.controller;
 
-import bokzip.back.config.CustomException;
-import bokzip.back.config.GlobalExceptionHandler;
 import bokzip.back.domain.Post;
-import bokzip.back.dto.HomeResponseDto;
+import bokzip.back.dto.HomeMapping;
 import bokzip.back.service.PostService;
-import com.sun.tools.javac.main.Option;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -25,34 +22,31 @@ public class PostController{
         this.postService = postService;
     }
 
-    //@param : 중앙부처 전체 데이터 조회
+    //@param : [중앙부처 + 로컬] 전체 데이터 조회
     @GetMapping("/center")
-    public List<Post> selectAll() throws Exception {
+    public List<HomeMapping> selectAll(){
         return postService.findAll();}
 
-    //@param : pk로 중앙부처 데이터 조회
+    //@param : [중앙부처 + 로컬] pk로 데이터 조회
     @GetMapping("/center/{id}")
-    public Optional<Post> getOneData(@PathVariable @Validated Long id) throws Exception  { //id에 validated로 선언하여 binding error 시 에러 호출
+    public Optional<Post> getOneData(@PathVariable @Validated Long id){ //id에 validated로 선언하여 binding error 시 에러 호출
         Optional<Post> post = postService.findId(id);
 
         if(!post.isPresent()) //null 값 반환 방지
-            throw new CustomException();
+            throw new RuntimeException("404");
 
         return post;
     }
 
-    //@param : 중앙부처 분야별 데이터 조회
+    //@param : [중앙부처] category로 조회
     @GetMapping("/center/category/{category}")
-    public List<HomeResponseDto> getAllCategory(@PathVariable @Validated String category) throws Exception  {
-        List<HomeResponseDto> categoryResult = new ArrayList<>();
+    public List<HomeMapping> getAllCategory(@PathVariable @Validated String category){
+        List<HomeMapping> categoryResult = new ArrayList<>();
 
-        if(category != null)
-            postService.getListforCategory(category).forEach(categoryResult::add);
-        else //null 값 반환 방지 -> 임의로 nullpointerror 호출 시 customexception에서 낚아채지 않고 예외 발생 후 앱 종료
-            throw new CustomException();
+        postService.getListLikeCategory(category).forEach(categoryResult::add);
 
         if(categoryResult.isEmpty()) //null 값 반환 방지
-            throw new CustomException();
+            throw new RuntimeException("404");
 
         return categoryResult;
     }

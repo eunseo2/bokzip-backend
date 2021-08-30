@@ -1,10 +1,8 @@
 package bokzip.back.domain;
 
 import lombok.Data;
-import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
-import java.util.Date;
 
 @Entity
 @Table(name = "Posts")
