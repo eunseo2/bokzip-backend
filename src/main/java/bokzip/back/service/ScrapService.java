@@ -48,6 +48,7 @@ public class ScrapService {
             getPost.ifPresent(post -> {
                 int startCount = post.getStarCount();
                 post.setStarCount(++startCount);
+                post.setIsScrap(Boolean.TRUE);
             });
             scrapPostCheck(user, getPost);
             scrap = new Scrap(user, getPost.get());
@@ -58,6 +59,7 @@ public class ScrapService {
             getGeneral.ifPresent(general -> {
                 int startCount = general.getStarCount();
                 general.setStarCount(++startCount);
+                general.setIsScrap(Boolean.TRUE);
             });
             scrapGeneralCheck(user, getGeneral);
             scrap = new Scrap(user, getGeneral.get());
@@ -88,6 +90,7 @@ public class ScrapService {
             getPost.ifPresent(post -> {
                 int startCount = post.getStarCount();
                 post.setStarCount(--startCount);
+                post.setIsScrap(Boolean.FALSE);
             });
             Optional<Scrap> getScrap = scrapRepository.findByUserAndPost(user, getPost.get());
             scrapRepository.delete(getScrap.get());
@@ -97,6 +100,7 @@ public class ScrapService {
             getGeneral.ifPresent(general -> {
                 int startCount = general.getStarCount();
                 general.setStarCount(--startCount);
+                general.setIsScrap(Boolean.FALSE);
             });
             Optional<Scrap> getScrap = scrapRepository.findByUserAndGeneral(user, getGeneral.get());
             scrapRepository.delete(getScrap.get());

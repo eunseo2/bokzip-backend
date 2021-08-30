@@ -57,4 +57,8 @@ public class Post {
     @Column(name = "star_count",columnDefinition = "integer default 0")
     private Integer starCount;
 
+    //스크랩 여부
+    @Column(name = "is_scrap", columnDefinition = "boolean default false")
+    private Boolean isScrap;
+
 }
