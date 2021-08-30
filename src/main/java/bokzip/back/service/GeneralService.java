@@ -1,6 +1,7 @@
 package bokzip.back.service;
 
 import bokzip.back.domain.General;
+import bokzip.back.dto.HomeMapping;
 import bokzip.back.repository.GeneralRepository;
 import org.springframework.stereotype.Service;
 
@@ -23,7 +24,7 @@ public class GeneralService {
         return generalRepository.findById(id);
     }
 
-    public List<General> findAll(){
-        return generalRepository.findAll();
+    public List<HomeMapping> findAll(){
+        return generalRepository.findAllBy();
     }
 }
