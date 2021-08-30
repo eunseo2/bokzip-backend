@@ -40,7 +40,7 @@ public class ScrapService {
 
         Scrap scrap;
         User user = new User();
-        user.setId(2L);
+        user.setId(1L);
 
 
         if (type == ScrapType.POST) {
@@ -80,7 +80,7 @@ public class ScrapService {
         Optional<General> getGeneral = null;
 
         User user = new User();
-        user.setId(2L);
+        user.setId(1L);
 
 
         if (type == ScrapType.POST) {
@@ -125,7 +125,7 @@ public class ScrapService {
 
     public List<ScrapMapping> Scraps() {
         User user = new User();
-        user.setId(2L);
+        user.setId(1L);
         return scrapRepository.findByUser(user);
     }
 
