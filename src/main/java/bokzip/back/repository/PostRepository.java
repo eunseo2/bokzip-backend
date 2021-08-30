@@ -1,9 +1,9 @@
 package bokzip.back.repository;
 
 import bokzip.back.domain.Post;
-import bokzip.back.dto.HomeResponseDto;
+import bokzip.back.dto.PostMapping;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
@@ -19,7 +19,8 @@ public interface PostRepository extends JpaRepository<Post, Long> {
      *        참고사이트 : https://velog.io/@devyu/spring-Spring-Data-JPA-%EA%B8%B0%EB%B3%B8%EC%A0%95%EB%A6%AC
      *                   https://ppomelo.tistory.com/155?category=908484
      */
-    @Query(value = "select new bokzip.back.dto.HomeResponseDto(p.id, p.title, p.thumbnail, p.starCount) from Post p where p.category in :category")
-    List<HomeResponseDto> findByCategory(@Param("category") String category);
 
+    List<PostMapping> findByCategoryLike(@Param("category")String category);
+
+    List<PostMapping> findAllBy(Sort id);
 }
