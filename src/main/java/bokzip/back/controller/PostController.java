@@ -1,7 +1,7 @@
 package bokzip.back.controller;
 
 import bokzip.back.domain.Post;
-import bokzip.back.dto.HomeMapping;
+import bokzip.back.dto.PostMapping;
 import bokzip.back.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
@@ -23,8 +23,8 @@ public class PostController{
     }
 
     //@param : [중앙부처 + 로컬] 전체 데이터 조회
-    @GetMapping("/center")
-    public List<HomeMapping> selectAll(){
+    @GetMapping("/centers")
+    public List<PostMapping> selectAll(){
         return postService.findAll();}
 
     //@param : [중앙부처 + 로컬] pk로 데이터 조회
@@ -40,8 +40,8 @@ public class PostController{
 
     //@param : [중앙부처] category로 조회
     @GetMapping("/center/category/{category}")
-    public List<HomeMapping> getAllCategory(@PathVariable @Validated String category){
-        List<HomeMapping> categoryResult = new ArrayList<>();
+    public List<PostMapping> getAllCategory(@PathVariable @Validated String category){
+        List<PostMapping> categoryResult = new ArrayList<>();
 
         postService.getListLikeCategory(category).forEach(categoryResult::add);
 

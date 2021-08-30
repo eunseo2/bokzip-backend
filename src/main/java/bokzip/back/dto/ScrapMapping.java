@@ -5,6 +5,7 @@ import bokzip.back.domain.Post;
 
 public interface ScrapMapping {
     Long getId();
-    Post getPost();
+    PostMapping getPost();
     General getGeneral();
+    Long getUserId();
 }
