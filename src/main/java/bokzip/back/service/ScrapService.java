@@ -112,7 +112,7 @@ public class ScrapService {
     private Optional<Scrap> scrapPostCheck(User user, Optional<Post> post) {
         Optional<Scrap> scrap = scrapRepository.findByUserAndPost(user, post.get());
         if (scrap.isPresent()) {
-            throw new RuntimeException("이미 스크랩 했습니다.");
+            throw new RuntimeException("409");
         }
         return scrap;
     }
@@ -120,7 +120,7 @@ public class ScrapService {
     private Optional<Scrap> scrapGeneralCheck(User user, Optional<General> general) {
         Optional<Scrap> scrap = scrapRepository.findByUserAndGeneral(user, general.get());
         if (scrap.isPresent()) {
-            throw new RuntimeException("이미 스크랩 했습니다.");
+            throw new RuntimeException("409");
         }
         return scrap;
 

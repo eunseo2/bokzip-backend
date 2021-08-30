@@ -1,6 +1,7 @@
 package bokzip.back.controller;
 
 import bokzip.back.domain.General;
+import bokzip.back.dto.HomeMapping;
 import bokzip.back.service.GeneralService;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,7 +19,7 @@ public class GeneralController {
 
     //@param : 일반 전체 데이터 조회
     @GetMapping("/generals")
-    public List<General> generals() {
+    public List<HomeMapping> generals() {
         return generalService.findAll();
     }
 
@@ -39,7 +40,13 @@ public class GeneralController {
     //@param : pk로 일반 데이터 조회
     @GetMapping("/general/{id}")
     public Optional<General> findById(@PathVariable Long id) {
-        return generalService.findById(id);
+
+        Optional<General> general = generalService.findById(id);
+
+        if (!general.isPresent())//null 값 반환 방지
+            throw new RuntimeException("404");
+
+        return general;
     }
 
 }
