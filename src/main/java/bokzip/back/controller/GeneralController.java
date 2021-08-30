@@ -1,7 +1,9 @@
 package bokzip.back.controller;
 
 import bokzip.back.domain.General;
+import bokzip.back.dto.GeneralMapping;
 import bokzip.back.dto.HomeMapping;
+import bokzip.back.dto.ScrapMapping;
 import bokzip.back.service.GeneralService;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,20 +21,20 @@ public class GeneralController {
 
     //@param : 일반 전체 데이터 조회
     @GetMapping("/generals")
-    public List<HomeMapping> generals() {
+    public List<GeneralMapping> generals() {
         return generalService.findAll();
     }
 
     //@param : 일반 전체 데이터 조회
     @GetMapping("/generals/star")
-    public List<General> StarGenerals() {
+    public List<GeneralMapping> StarGenerals() {
         return generalService.StarfindAll();
     }
 
 
     //@param : 일반 전체 데이터 조회
     @GetMapping("/generals/view")
-    public List<General> ViewGenerals() {
+    public List<GeneralMapping> ViewGenerals() {
         return generalService.ViewfindAll();
     }
 
