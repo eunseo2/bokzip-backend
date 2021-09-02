@@ -3,6 +3,7 @@ package bokzip.back.controller;
 import bokzip.back.domain.Post;
 import bokzip.back.dto.PostMapping;
 import bokzip.back.dto.SortType;
+
 import bokzip.back.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
@@ -24,10 +25,9 @@ public class PostController {
 
     //@param : [중앙부처 + 로컬] 전체 데이터 조회
     @GetMapping("/centers")
-    public List<PostMapping> selectAll() {
-        return postService.findAll();
-    }
 
+    public List<PostMapping> selectAll(){
+        return postService.findAll();}
 
     //@param : [중앙부처 + 로컬] pk로 데이터 조회
     @GetMapping("/center/{id}")
@@ -40,10 +40,24 @@ public class PostController {
         return post;
     }
 
+
     //@param : [중앙부처 + 로컬] 조회수 증가
     @GetMapping("/center/view/{id}")
     public void addPostView(@PathVariable @Validated Long id) {
         postService.addPostView(id);
+
+    //@param : [중앙부처- 로그인전 둘러보기] category로 조회
+    @GetMapping("/center/category/{category}")
+    public List<PostMapping> getAllCategory(@PathVariable @Validated String category){
+        List<PostMapping> categoryResult = new ArrayList<>();
+
+        postService.getListLikeCategory(category).forEach(categoryResult::add);
+
+        if(categoryResult.isEmpty()) //null 값 반환 방지
+            throw new RuntimeException("404");
+
+        return categoryResult;
+
     }
 
     //@param : [중앙부처 + 로컬] 맞춤형 정보

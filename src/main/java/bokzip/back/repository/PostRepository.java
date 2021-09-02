@@ -1,7 +1,7 @@
 package bokzip.back.repository;
 
 import bokzip.back.domain.Post;
-import bokzip.back.dto.HomeMapping;
+import bokzip.back.dto.PostMapping;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.query.Param;
@@ -30,4 +30,5 @@ public interface PostRepository extends JpaRepository<Post, Long> {
     List<PostMapping> findByCategoryContainsOrderByViewCountDesc(String category);
 
     List<PostMapping> findByCategoryContainsOrderByStarCountDesc(String category);
+
 }

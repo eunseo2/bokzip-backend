@@ -2,7 +2,9 @@ package bokzip.back.service;
 
 import bokzip.back.domain.Post;
 import bokzip.back.dto.PostMapping;
+
 import bokzip.back.dto.SortType;
+
 import bokzip.back.repository.PostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
@@ -28,20 +30,23 @@ public class PostService {
             throw new RuntimeException("404");
 
         Object nullCheck = id;
-        if (nullCheck == null)
+
+        if(nullCheck == null)
+
             throw new RuntimeException("400");
 
         return postRepository.findById(id);
     }
 
     // @param : [중앙부처 + 로컬] 모든 데이터 조회
-    public List<PostMapping> findAll() {
-//        return postRepository.findAll(Sort.by(Sort.Direction.ASC, "id"));
+    public List<PostMapping> findAll(){
+      
         return postRepository.findAllBy(Sort.by(Sort.Direction.ASC, "id"));
     }
 
     // @param : [중앙부처] 데이터 category로 조회
-    public List<PostMapping> getListLikeCategory(String category) {
+
+    public List<PostMapping> getListLikeCategory(String category){
         String req_category = "%";
 
         boolean isNumber = category.matches("^[0-9]*$");

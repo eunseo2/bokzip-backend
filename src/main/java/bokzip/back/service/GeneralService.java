@@ -2,6 +2,7 @@ package bokzip.back.service;
 
 import bokzip.back.domain.General;
 import bokzip.back.dto.GeneralMapping;
+
 import bokzip.back.repository.GeneralRepository;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
@@ -25,8 +26,10 @@ public class GeneralService {
         return generalRepository.findById(id);
     }
 
+
     public List<GeneralMapping> findAll() {
         return generalRepository.findAllBy(Sort.by(Sort.Direction.ASC, "id"));
+
     }
 
     public List<GeneralMapping> StarfindAll() {
