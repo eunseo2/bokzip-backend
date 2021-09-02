@@ -31,4 +31,6 @@ public interface PostRepository extends JpaRepository<Post, Long> {
 
     List<PostMapping> findByCategoryContainsOrderByStarCountDesc(String category);
 
+    List<PostMapping> findByCategoryContainsOrderByIdAsc(String category);
+
 }
