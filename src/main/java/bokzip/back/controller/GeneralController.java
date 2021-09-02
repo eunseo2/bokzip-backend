@@ -3,10 +3,13 @@ package bokzip.back.controller;
 import bokzip.back.domain.General;
 
 import bokzip.back.dto.GeneralMapping;
-import bokzip.back.dto.ScrapMapping;
 
 import bokzip.back.service.GeneralService;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 import java.util.Optional;
@@ -51,6 +54,12 @@ public class GeneralController {
             throw new RuntimeException("404");
 
         return general;
+    }
+
+    //@param : 일반 조회수 증가
+    @GetMapping("/general/view/{id}")
+    public void addGeneralView(@PathVariable @Validated Long id) {
+        generalService.addGeneralView(id);
     }
 
 }

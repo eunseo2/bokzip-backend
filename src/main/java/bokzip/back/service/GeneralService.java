@@ -40,4 +40,14 @@ public class GeneralService {
         return generalRepository.findAllBy(Sort.by(Sort.Direction.DESC, "viewCount"));
 
     }
+
+    public void addGeneralView(Long id) {
+        if (id >= 100 || id <= 0)
+            throw new RuntimeException("404");
+
+        Optional<General> general = generalRepository.findById(id);
+        Integer viewCount = general.get().getViewCount();
+        general.get().setViewCount(++viewCount);
+        generalRepository.save(general.get());
+    }
 }
