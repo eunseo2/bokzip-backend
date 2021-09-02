@@ -31,7 +31,7 @@ public class PostService {
 
         Object nullCheck = id;
 
-        if(nullCheck == null)
+        if (nullCheck == null)
 
             throw new RuntimeException("400");
 
@@ -39,14 +39,14 @@ public class PostService {
     }
 
     // @param : [중앙부처 + 로컬] 모든 데이터 조회
-    public List<PostMapping> findAll(){
-      
+    public List<PostMapping> findAll() {
+
         return postRepository.findAllBy(Sort.by(Sort.Direction.ASC, "id"));
     }
 
     // @param : [중앙부처] 데이터 category로 조회
 
-    public List<PostMapping> getListLikeCategory(String category){
+    public List<PostMapping> getListLikeCategory(String category) {
         String req_category = "%";
 
         boolean isNumber = category.matches("^[0-9]*$");
@@ -87,8 +87,9 @@ public class PostService {
                 return postRepository.findByCategoryContainsOrderByViewCountDesc(category);
             case starCount:
                 return postRepository.findByCategoryContainsOrderByStarCountDesc(category);
+            default:
+                return postRepository.findByCategoryContainsOrderByIdAsc(category);
         }
 
-        return null;
     }
 }
