@@ -1,7 +1,6 @@
 package bokzip.back.config;
 
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -23,6 +22,16 @@ public class GlobalExceptionHandler {
                 errorCode = ErrorCode.INVALID_VALUE;
                 return new ResponseEntity<>(ErrorResponse.res(errorCode.getMsg()), errorCode.getHttpStatus());
 
+            case "401" :
+                log.error("401 UnAuthorized", e);
+                errorCode = ErrorCode.UNAUTHORIZED;
+                return new ResponseEntity<>(ErrorResponse.res(errorCode.getMsg()), errorCode.getHttpStatus());
+
+            case "403":
+                log.error("403 Forbidden", e);
+                errorCode = ErrorCode.FORBIDDEN;
+                return new ResponseEntity<>(ErrorResponse.res(errorCode.getMsg()), errorCode.getHttpStatus());
+
             case "404":
                 log.error("404 Not Found Error", e);
                 errorCode = ErrorCode.NO_DATA;
@@ -42,10 +51,9 @@ public class GlobalExceptionHandler {
 
     //@param : controller로 들어오는 value 타입이 잘못된 경우 호출
     @ExceptionHandler(MethodArgumentTypeMismatchException.class)
-    public static ResponseEntity missmatchException(MethodArgumentTypeMismatchException e){
+    public static ResponseEntity missmatchException(MethodArgumentTypeMismatchException e) {
         log.error("400 Bad Request", e);
         ErrorCode errorCode = ErrorCode.INVALID_VALUE;
         return new ResponseEntity<>(ErrorResponse.res(errorCode.getMsg()), errorCode.getHttpStatus());
     }
-
 }

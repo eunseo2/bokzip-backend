@@ -23,14 +23,12 @@ public class ScrapController {
     public ResponseEntity addPostScrap(@PathVariable Long postId) {
         scrapService.addPostScrap(postId);
         return new ResponseEntity<>(SuccessResponse.res("스크랩 되었습니다."), HttpStatus.OK);
-//        return "스크랩 되었습니다.";
     }
 
     @PostMapping("/general/{generalId}")
     public ResponseEntity addGeneralScrap(@PathVariable Long generalId) {
         scrapService.addGeneralScrap(generalId);
         return new ResponseEntity<>(SuccessResponse.res("스크랩 되었습니다."), HttpStatus.OK);
-//        return "스크랩 되었습니다.";
     }
 
 
@@ -38,14 +36,12 @@ public class ScrapController {
     public ResponseEntity deletePostScrap(@PathVariable Long postId) {
         scrapService.deletePostScrap(postId);
         return new ResponseEntity<>(SuccessResponse.res("스크랩 해제되었습니다."), HttpStatus.OK);
-//        return ResponseEntity.ok().body("스크랩 해제되었습니다.");
     }
 
     @DeleteMapping("/general/{generalId}")
     public ResponseEntity deleteGeneralScrap(@PathVariable Long generalId) {
         scrapService.deleteGeneralScrap(generalId);
         return new ResponseEntity<>(SuccessResponse.res("스크랩 해제되었습니다."), HttpStatus.OK);
-//        return ResponseEntity.ok().body("스크랩 해제되었습니다.");
     }
 
     @GetMapping("/scraps")

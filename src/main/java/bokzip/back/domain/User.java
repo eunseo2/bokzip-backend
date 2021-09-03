@@ -1,5 +1,7 @@
 package bokzip.back.domain;
 
+import bokzip.back.dto.Provider;
+import lombok.Builder;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -34,33 +36,34 @@ public class User {
     @Column(length = 128)
     private String category;
 
-//    // @see : 구글, 카카오 소셜로그인을 위해 생성
-//    @Enumerated(EnumType.STRING)
-//    @Column(nullable = false)
-//    private Role role;
-//
-//    /**
-//     * @see : No default constructor for entity 에러 해결을 위해 기본 생성자 생성
-//     *        (JPA 2.0 표준 스펙에 반드시 기본 생성자가 있어야 한다고 함)
-//     */
-//    public User(){
-//    }
-//
-//    @Builder
-//    public User(String email, String name, String profile, Role role){
-//        this.email = email;
-//        this.name = name;
-//        this.profile = profile;
-//        this.role = role;
-//    }
-//
-//    public User update(String name, String profile){
-//        this.name = name;
-//        this.profile = profile;
-//        return this;
-//    }
-//
-//    public String getRoleKey(){
-//        return this.role.getKey();
-//    }
+    // @see : 구글, 카카오 소셜로그인을 위해 생성
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private Provider provider;
+
+    /**
+     * @see : No default constructor for entity 에러 해결을 위해 기본 생성자 생성
+     *        (JPA 2.0 표준 스펙에 반드시 기본 생성자가 있어야 한다고 함)
+     */
+    public User(){
+    }
+
+    @Builder
+    public User(String email, String name, String profile, Provider provider){
+        this.email = email;
+        this.name = name;
+        this.profile = profile;
+        this.provider = provider;
+    }
+
+    public User update(String name, String profile){
+        this.name = name;
+        this.profile = profile;
+        return this;
+    }
+
+    public String getRoleKey(){
+        return this.provider.getKey();
+    }
+    public String getRoleTitle(){ return this.provider.getTitle(); }
 }

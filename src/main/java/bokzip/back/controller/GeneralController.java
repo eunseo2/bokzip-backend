@@ -46,7 +46,7 @@ public class GeneralController {
 
     //@param : pk로 일반 데이터 조회
     @GetMapping("/general/{id}")
-    public Optional<General> findById(@PathVariable Long id) {
+    public Optional<General> findById(@PathVariable @Validated Long id) {
 
         Optional<General> general = generalService.findById(id);
 

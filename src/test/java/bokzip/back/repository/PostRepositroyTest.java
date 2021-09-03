@@ -1,7 +1,7 @@
 package bokzip.back.repository;
 
 import bokzip.back.domain.Post;
-import bokzip.back.dto.HomeMapping;
+import bokzip.back.dto.PostMapping;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -32,7 +32,7 @@ public class PostRepositroyTest {
     @Test
     public void 중앙부처전체데이터조회(){
         //given, when
-        List<HomeMapping> post = postRepository.findAllBy(Sort.by(Sort.Direction.ASC, "id"));
+        List<PostMapping> post = postRepository.findAllBy(Sort.by(Sort.Direction.ASC, "id"));
 
         //then
         if(!post.isEmpty())
@@ -47,7 +47,7 @@ public class PostRepositroyTest {
         String category = "%지원";
 
         //when
-        List<HomeMapping> listResult = postRepository.findByCategoryLike(category);
+        List<PostMapping> listResult = postRepository.findByCategoryLike(category);
 
         //then
         if(!listResult.isEmpty()){

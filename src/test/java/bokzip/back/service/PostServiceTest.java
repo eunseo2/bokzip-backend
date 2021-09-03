@@ -1,7 +1,7 @@
 package bokzip.back.service;
 
 import bokzip.back.domain.Post;
-import bokzip.back.dto.HomeMapping;
+import bokzip.back.dto.PostMapping;
 import bokzip.back.repository.PostRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,9 +43,9 @@ public class PostServiceTest {
 //        String category5 = "ads"; //error
 
         //when
-        List<HomeMapping> listResult1 = postService.getListLikeCategory(category1);
-        List<HomeMapping> listResult2 = postService.getListLikeCategory(category2);
-        List<HomeMapping> listResult3 = postService.getListLikeCategory(category3);
+        List<PostMapping> listResult1 = postService.getListLikeCategory(category1);
+        List<PostMapping> listResult2 = postService.getListLikeCategory(category2);
+        List<PostMapping> listResult3 = postService.getListLikeCategory(category3);
 //        List<HomeMapping> listResult4 = postService.getListLikeCategory(category4); //error
 //        List<HomeMapping> listResult5 = postService.getListLikeCategory(category5); //error
 
