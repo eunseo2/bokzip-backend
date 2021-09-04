@@ -7,4 +7,5 @@ public interface PostMapping {
     String getCategory();
     String getThumbnail();
     Boolean getIsScrap();
+    String getArea();
 }
