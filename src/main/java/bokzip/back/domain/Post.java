@@ -33,9 +33,13 @@ public class Post {
     @Column(columnDefinition = "TEXT",nullable = true)
     private String criteria;
 
-    //분야 or 지역
+    //분야
     @Column()
     private String category;
+
+    //지역
+    @Column()
+    private String area;
 
     //연락처
     @Column(columnDefinition = "TEXT")
