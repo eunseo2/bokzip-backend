@@ -70,7 +70,7 @@ public class PostService {
         postRepository.save(post.get());
     }
 
-    public List<PostMapping> getListCategorySort(String category, SortType sort) {
+    public List<PostMapping> getListCategorySort(String category, String area, SortType sort) {
 
 
         boolean isNumber = category.matches("^[0-9]*$");
@@ -81,14 +81,13 @@ public class PostService {
 
         if (category.equals("전체")) category = "지원";
 
-
         switch (sort) {
             case viewCount:
-                return postRepository.findByCategoryContainsOrderByViewCountDesc(category);
+                return postRepository.findByCategoryContainsAndAreaContainsOrderByViewCountDesc(category, area);
             case starCount:
-                return postRepository.findByCategoryContainsOrderByStarCountDesc(category);
+                return postRepository.findByCategoryContainsAndAreaContainsOrderByStarCountDesc(category, area);
             default:
-                return postRepository.findByCategoryContainsOrderByIdAsc(category);
+                return postRepository.findByCategoryContainsAndAreaContainsOrderByIdAsc(category, area);
         }
 
     }

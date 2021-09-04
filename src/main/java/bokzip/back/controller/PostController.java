@@ -66,10 +66,10 @@ public class PostController {
     //@param : [중앙부처 + 로컬] 맞춤형 정보
     @GetMapping("/center/custom")
     public List<PostMapping> getPosts(@RequestParam(value = "category") String category,
-                         @RequestParam(value = "local", required = false, defaultValue = "") String local,
-                         @RequestParam(value = "sort", required = false, defaultValue = "Id") SortType sort
+                                      @RequestParam(value = "area", required = false, defaultValue = "") String area,
+                                      @RequestParam(value = "sort", required = false, defaultValue = "Id") SortType sort
     ) {
 
-        return postService.getListCategorySort(category, sort);
+        return postService.getListCategorySort(category, area, sort);
     }
 }
