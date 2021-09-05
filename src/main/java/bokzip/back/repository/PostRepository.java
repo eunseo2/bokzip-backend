@@ -27,10 +27,10 @@ public interface PostRepository extends JpaRepository<Post, Long> {
     List<PostMapping> findAllBy(Sort id);
 
 
-    List<PostMapping> findByCategoryContainsOrderByViewCountDesc(String category);
+    List<PostMapping> findByCategoryContainsAndAreaContainsOrderByViewCountDesc(String category, String area);
 
-    List<PostMapping> findByCategoryContainsOrderByStarCountDesc(String category);
+    List<PostMapping> findByCategoryContainsAndAreaContainsOrderByStarCountDesc(String category, String area);
 
-    List<PostMapping> findByCategoryContainsOrderByIdAsc(String category);
+    List<PostMapping> findByCategoryContainsAndAreaContainsOrderByIdAsc(String category, String area);
 
 }
