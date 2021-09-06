@@ -1,10 +1,8 @@
 package bokzip.back.domain;
 
 import lombok.Data;
-import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
-import java.util.Date;
 
 @Entity
 @Table(name = "Posts")
@@ -35,9 +33,13 @@ public class Post {
     @Column(columnDefinition = "TEXT",nullable = true)
     private String criteria;
 
-    //분야 or 지역
+    //분야
     @Column()
     private String category;
+
+    //지역
+    @Column()
+    private String area;
 
     //연락처
     @Column(columnDefinition = "TEXT")
@@ -58,5 +60,9 @@ public class Post {
     //스크랩 수
     @Column(name = "star_count",columnDefinition = "integer default 0")
     private Integer starCount;
+
+    //스크랩 여부
+    @Column(name = "is_scrap", columnDefinition = "boolean default false")
+    private Boolean isScrap;
 
 }

@@ -1,7 +1,7 @@
 package bokzip.back.service;
 
 import bokzip.back.domain.Post;
-import bokzip.back.dto.HomeResponseDto;
+import bokzip.back.dto.HomeMapping;
 import bokzip.back.repository.PostRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,17 +36,40 @@ public class PostServiceTest {
     @Test
     public void 중앙부처카테고리조회(){
         //given
-        String category = "1";
+        String category1 = "생활지원";
+        String category2 = "교육지원";
+        String category3 = "지원";
+//        String category4 = "12"; //error
+//        String category5 = "ads"; //error
 
         //when
-        List<HomeResponseDto> listResult = postService.getListforCategory(category);
+        List<HomeMapping> listResult1 = postService.getListLikeCategory(category1);
+        List<HomeMapping> listResult2 = postService.getListLikeCategory(category2);
+        List<HomeMapping> listResult3 = postService.getListLikeCategory(category3);
+//        List<HomeMapping> listResult4 = postService.getListLikeCategory(category4); //error
+//        List<HomeMapping> listResult5 = postService.getListLikeCategory(category5); //error
 
         //then
-        if(!listResult.isEmpty()){
-            System.out.println("개수 : " + listResult.size()); //36개 나와야 함
-            System.out.println(listResult);
+        if(!listResult1.isEmpty()){
+            System.out.println("개수 : " + listResult1.size()); //36개 나와야 함
+            System.out.println(listResult1.toString());
         }
         else
             System.out.println("post는 null");
+
+        if(!listResult2.isEmpty()){
+            System.out.println("개수 : " + listResult2.size()); //36개 나와야 함
+            System.out.println(listResult2.toString());
+        }
+        else
+            System.out.println("post는 null");
+
+        if(!listResult3.isEmpty()){
+            System.out.println("개수 : " + listResult3.size()); //36개 나와야 함
+            System.out.println(listResult3.toString());
+        }
+        else
+            System.out.println("post는 null");
+
     }
 }

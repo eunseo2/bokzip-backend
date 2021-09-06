@@ -1,11 +1,15 @@
 package bokzip.back.controller;
 
 import bokzip.back.domain.General;
-import bokzip.back.dto.ErrorResponse;
+
+import bokzip.back.dto.GeneralMapping;
+
 import bokzip.back.service.GeneralService;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 import java.util.Optional;
@@ -20,25 +24,42 @@ public class GeneralController {
     }
 
     //@param : 일반 전체 데이터 조회
-    @GetMapping("/general")
-    public List<General> generals() {
+    @GetMapping("/generals")
+
+    public List<GeneralMapping> generals() {
         return generalService.findAll();
     }
 
+    //@param : 일반 전체 데이터 조회
+    @GetMapping("/generals/star")
+    public List<GeneralMapping> StarGenerals() {
+        return generalService.StarfindAll();
+    }
+
+
+    //@param : 일반 전체 데이터 조회
+    @GetMapping("/generals/view")
+    public List<GeneralMapping> ViewGenerals() {
+        return generalService.ViewfindAll();
+    }
+
+
     //@param : pk로 일반 데이터 조회
     @GetMapping("/general/{id}")
-    public ResponseEntity findById(@PathVariable Long id) {
+    public Optional<General> findById(@PathVariable Long id) {
+
         Optional<General> general = generalService.findById(id);
 
-        if (id >= 100 || id <= 0) {
-            return new ResponseEntity<>(
-                    ErrorResponse.res("일치하는 정보가 없습니다. general_id를 다시 확인해주십시오."), HttpStatus.BAD_REQUEST);
-        } else if (!general.isPresent()) { //404 Not Found
-            return new ResponseEntity<>(ErrorResponse.res("요청받은 리소스를 찾을 수 없습니다."), HttpStatus.NOT_FOUND);
-        } else { //200 OK
-            return new ResponseEntity<>(general, HttpStatus.OK);
-        }
+        if (!general.isPresent())//null 값 반환 방지
+            throw new RuntimeException("404");
 
+        return general;
+    }
+
+    //@param : 일반 조회수 증가
+    @GetMapping("/general/view/{id}")
+    public void addGeneralView(@PathVariable @Validated Long id) {
+        generalService.addGeneralView(id);
     }
 
 }
