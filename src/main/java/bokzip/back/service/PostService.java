@@ -71,8 +71,6 @@ public class PostService {
     }
 
     public List<PostMapping> getListCategorySort(String category, String area, SortType sort) {
-
-
         boolean isNumber = category.matches("^[0-9]*$");
         boolean isEnglish = category.matches("^[a-zA-Z]*$");
 

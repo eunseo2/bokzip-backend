@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
+import java.util.NoSuchElementException;
+
 @RestControllerAdvice //@Controller 전역에서 발생할 수 있는 예외를 잡아 처리
 @Slf4j
 public class GlobalExceptionHandler {
@@ -54,6 +56,14 @@ public class GlobalExceptionHandler {
     public static ResponseEntity missmatchException(MethodArgumentTypeMismatchException e) {
         log.error("400 Bad Request", e);
         ErrorCode errorCode = ErrorCode.INVALID_VALUE;
+        return new ResponseEntity<>(ErrorResponse.res(errorCode.getMsg()), errorCode.getHttpStatus());
+    }
+
+    //@param : DB에 해당 값이 없을 경우 NoSuchElementException 호출
+    @ExceptionHandler(NoSuchElementException.class)
+    public static ResponseEntity nosuchException(NoSuchElementException e){
+        log.error("404 Not Found Error", e);
+        ErrorCode errorCode = ErrorCode.NO_DATA;
         return new ResponseEntity<>(ErrorResponse.res(errorCode.getMsg()), errorCode.getHttpStatus());
     }
 }

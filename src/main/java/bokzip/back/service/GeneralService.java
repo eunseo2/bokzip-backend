@@ -19,7 +19,6 @@ public class GeneralService {
     }
 
     public Optional<General> findById(Long id) {
-        //id가 null == 전체조회와 같음
         if (id >= 100 || id < 0)
             throw new RuntimeException("404");
 

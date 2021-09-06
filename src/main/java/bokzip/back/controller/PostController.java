@@ -42,7 +42,6 @@ public class PostController {
         return post;
     }
 
-
     //@param : [중앙부처 + 로컬] 조회수 증가
     @GetMapping("/center/view/{id}")
     public void addPostView(@PathVariable @Validated Long id) {
@@ -52,15 +51,12 @@ public class PostController {
     //@param : [중앙부처- 로그인전 둘러보기] category로 조회
     @GetMapping("/center/category/{category}")
     public List<PostMapping> getAllCategory(@PathVariable @Validated String category) {
-        List<PostMapping> categoryResult = new ArrayList<>();
-
-        postService.getListLikeCategory(category).forEach(categoryResult::add);
+        List<PostMapping> categoryResult = postService.getListLikeCategory(category);
 
         if (categoryResult.isEmpty()) //null 값 반환 방지
             throw new RuntimeException("404");
 
         return categoryResult;
-
     }
 
     //@param : [중앙부처 + 로컬] 맞춤형 정보
@@ -69,7 +65,11 @@ public class PostController {
                                       @RequestParam(value = "area", required = false, defaultValue = "") String area,
                                       @RequestParam(value = "sort", required = false, defaultValue = "Id") SortType sort
     ) {
+        List<PostMapping> result = postService.getListCategorySort(category, area, sort);
 
-        return postService.getListCategorySort(category, area, sort);
+        if(result.isEmpty()) //null 값 반환 방지
+           throw new RuntimeException("404");
+
+        return result;
     }
 }
