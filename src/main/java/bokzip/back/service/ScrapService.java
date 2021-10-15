@@ -1,11 +1,14 @@
 package bokzip.back.service;
 
+import bokzip.back.config.UserConverter;
 import bokzip.back.domain.*;
 import bokzip.back.dto.ScrapMapping;
+import bokzip.back.dto.UserDto;
 import bokzip.back.repository.GeneralRepository;
 import bokzip.back.repository.PostRepository;
 import bokzip.back.repository.ScrapRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -16,93 +19,71 @@ public class ScrapService {
     private final ScrapRepository scrapRepository;
     private final PostRepository postRepository;
     private final GeneralRepository generalRepository;
+    private final UserConverter userConverter;
 
-    public ScrapService(ScrapRepository scrapRepository, PostRepository postRepository, GeneralRepository generalRepository) {
+    public ScrapService(ScrapRepository scrapRepository, PostRepository postRepository, GeneralRepository generalRepository, UserConverter userConverter) {
         this.scrapRepository = scrapRepository;
         this.postRepository = postRepository;
         this.generalRepository = generalRepository;
+        this.userConverter = userConverter;
     }
 
-    public Scrap addPostScrap(Long postId) {
-
-        return getAddScrap(postId, ScrapType.POST);
-    }
-
-
-    public Scrap addGeneralScrap(Long generalId) {
-
-        return getAddScrap(generalId, ScrapType.GENERAL);
-    }
-
-    private Scrap getAddScrap(Long Id, ScrapType type) {
-        Optional<Post> getPost = null;
-        Optional<General> getGeneral = null;
+    @Transactional
+    public Scrap addScrap(Long Id, ScrapType type, UserDto dto) {
+        User user = userConverter.converterUser(dto);
 
         Scrap scrap;
-        User user = new User();
-        user.setId(1L);
-
 
         if (type == ScrapType.POST) {
-            getPost = postRepository.findById(Id);
-            getPost.ifPresent(post -> {
-                int startCount = post.getStarCount();
-                post.setStarCount(++startCount);
-                post.setIsScrap(Boolean.TRUE);
-            });
-            scrapPostCheck(user, getPost);
-            scrap = new Scrap(user, getPost.get());
+            Post post = postRepository.findById(Id)
+                    .orElseThrow(() -> new RuntimeException("404"));
+            post.addScrap(post.getStarCount());
+
+//          scrapPostCheck(user, getPost);
+
+            scrap = new Scrap();
+            scrap.updatePost(user, post);
             scrapRepository.save(scrap);
 
         } else {
-            getGeneral = generalRepository.findById(Id);
-            getGeneral.ifPresent(general -> {
-                int startCount = general.getStarCount();
-                general.setStarCount(++startCount);
-                general.setIsScrap(Boolean.TRUE);
-            });
-            scrapGeneralCheck(user, getGeneral);
-            scrap = new Scrap(user, getGeneral.get());
+
+            General general = generalRepository.findById(Id)
+                    .orElseThrow(() -> new RuntimeException("404"));
+
+            general.addScrap(general.getStarCount());
+
+//            scrapGeneralCheck(user, getGeneral);
+
+            scrap = new Scrap();
+            scrap.updateGeneral(user, general);
             scrapRepository.save(scrap);
         }
 
         return scrap;
     }
 
-    public void deletePostScrap(Long postId) {
-        getDeleteScrap(postId, ScrapType.POST);
-    }
+    public void deleteScrap(Long Id, ScrapType type, UserDto dto) {
 
-    public void deleteGeneralScrap(Long generalId) {
-        getDeleteScrap(generalId, ScrapType.GENERAL);
-    }
+        User user = userConverter.converterUser(dto);
 
-    private void getDeleteScrap(Long Id, ScrapType type) {
-        Optional<Post> getPost = null;
-        Optional<General> getGeneral = null;
-
-        User user = new User();
-        user.setId(1L);
-
+        Scrap scrap;
 
         if (type == ScrapType.POST) {
-            getPost = postRepository.findById(Id);
-            getPost.ifPresent(post -> {
-                int startCount = post.getStarCount();
-                post.setStarCount(--startCount);
-                post.setIsScrap(Boolean.FALSE);
-            });
-            Optional<Scrap> getScrap = scrapRepository.findByUserAndPost(user, getPost.get());
+            Post post = postRepository.findById(Id)
+                    .orElseThrow(() -> new RuntimeException("404"));
+            post.deleteScrap(post.getStarCount());
+            Optional<Scrap> getScrap = scrapRepository.findByUserAndPost(user, post);
             scrapRepository.delete(getScrap.get());
 
+
         } else {
-            getGeneral = generalRepository.findById(Id);
-            getGeneral.ifPresent(general -> {
-                int startCount = general.getStarCount();
-                general.setStarCount(--startCount);
-                general.setIsScrap(Boolean.FALSE);
-            });
-            Optional<Scrap> getScrap = scrapRepository.findByUserAndGeneral(user, getGeneral.get());
+
+            General general = generalRepository.findById(Id)
+                    .orElseThrow(() -> new RuntimeException("404"));
+
+            general.deleteScrap(general.getStarCount());
+
+            Optional<Scrap> getScrap = scrapRepository.findByUserAndGeneral(user, general);
             scrapRepository.delete(getScrap.get());
         }
 
@@ -126,12 +107,8 @@ public class ScrapService {
 
     }
 
-
-    public List<ScrapMapping> Scraps() {
-        User user = new User();
-        user.setId(1L);
+    public List<ScrapMapping> Scraps(User user) {
         return scrapRepository.findByUser(user);
     }
-
 
 }
