@@ -27,13 +27,10 @@ public class OAuthAttributes {
         this.profile = profile;
     }
 
-    // @param : 네이버, 카카오 구분
     public static OAuthAttributes of(String provider, String userNameAttributeName, Map<String, Object> attributes) {
         switch (provider) {
             case "google":
                 return ofGoogle(userNameAttributeName, attributes);
-            case "kakao":
-                return ofKakao("email", attributes);
             default:
                 throw new RuntimeException("500"); //@todo 예외 번호 수정 해야 함
         }
@@ -46,20 +43,6 @@ public class OAuthAttributes {
                 .profile((String) attribute.get("picture"))
                 .attribute(attribute)
                 .nameAttributeKey(userNameAttributeName)
-                .build();
-    }
-
-    private static OAuthAttributes ofKakao(String attributeKey,
-                                           Map<String, Object> attributes) {
-        Map<String, Object> kakaoAccount = (Map<String, Object>) attributes.get("kakao_account");
-        Map<String, Object> kakaoProfile = (Map<String, Object>) kakaoAccount.get("profile");
-
-        return OAuthAttributes.builder()
-                .name((String) kakaoProfile.get("nickname"))
-                .email((String) kakaoAccount.get("email"))
-                .profile((String) kakaoProfile.get("profile_image_url"))
-                .attribute(kakaoAccount)
-                .nameAttributeKey(attributeKey)
                 .build();
     }
 

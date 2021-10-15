@@ -30,7 +30,7 @@ public class User {
     private String profile;
 
     //거주지 정보
-    @Column
+    @Column()
     private String address;
 
     //관심주제
@@ -60,7 +60,4 @@ public class User {
         return this.provider.getKey();
     }
 
-    public String getRoleTitle() {
-        return this.provider.getTitle();
-    }
 }

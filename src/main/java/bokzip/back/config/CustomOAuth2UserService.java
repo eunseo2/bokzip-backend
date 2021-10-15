@@ -46,7 +46,7 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
 
         //@param : 세션에 사용자 정보를 저장하기 위한 dto 클래스
         User user = saveOrUpdate(attributes);
-        httpSession.setAttribute("user", new UserDto()); // SessionUser (직렬화된 dto 클래스 사용)
+        httpSession.setAttribute("user", new UserDto(user)); // SessionUser (직렬화된 dto 클래스 사용)
 
         return new DefaultOAuth2User(Collections.singleton(new SimpleGrantedAuthority(user.getRoleKey())),
                 attributes.getAttribute(),
@@ -59,7 +59,6 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
         User user = userRepository.findByEmail(attributes.getEmail())
                 .map(entity -> entity.update(attributes.getName(), attributes.getProfile()))
                 .orElse(attributes.toEntity());
-        log.info(user.toString()); //@deprecated console 확인 용
         return userRepository.save(user);
     }
 }
