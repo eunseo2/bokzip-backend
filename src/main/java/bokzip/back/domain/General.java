@@ -39,4 +39,17 @@ public class General {
     //스크랩 여부
     @Column(name = "is_scrap", columnDefinition = "boolean default false")
     private Boolean isScrap;
+
+
+    public General addScrap(Integer starCount) {
+        this.starCount = ++starCount;
+        this.isScrap = Boolean.TRUE;
+        return this;
+    }
+
+    public General deleteScrap(Integer starCount) {
+        this.starCount = --starCount;
+        this.isScrap = Boolean.FALSE;
+        return this;
+    }
 }

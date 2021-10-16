@@ -11,7 +11,7 @@ import javax.persistence.*;
 public class Post {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="post_id")
+    @Column(name = "post_id")
     private Long id;
 
     @Column()
@@ -30,7 +30,7 @@ public class Post {
     private String target;
 
     //선정기준
-    @Column(columnDefinition = "TEXT",nullable = true)
+    @Column(columnDefinition = "TEXT", nullable = true)
     private String criteria;
 
     //분야
@@ -46,7 +46,7 @@ public class Post {
     private String contact;
 
     //신청주소
-    @Column(columnDefinition = "TEXT",name = "apply_url")
+    @Column(columnDefinition = "TEXT", name = "apply_url")
     private String applyUrl;
 
 
@@ -54,15 +54,29 @@ public class Post {
     private String howToApply;
 
     //조회수
-    @Column(name = "view_count",columnDefinition = "integer default 0")
+    @Column(name = "view_count", columnDefinition = "integer default 0")
     private Integer viewCount;
 
     //스크랩 수
-    @Column(name = "star_count",columnDefinition = "integer default 0")
+    @Column(name = "star_count", columnDefinition = "integer default 0")
     private Integer starCount;
 
     //스크랩 여부
     @Column(name = "is_scrap", columnDefinition = "boolean default false")
     private Boolean isScrap;
+
+    public Post addScrap(Integer starCount) {
+        this.starCount = ++starCount;
+        this.isScrap = Boolean.TRUE;
+        return this;
+
+    }
+
+    public Post deleteScrap(Integer starCount) {
+        this.starCount = --starCount;
+        this.isScrap = Boolean.FALSE;
+        return this;
+
+    }
 
 }
