@@ -51,7 +51,6 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
         return new DefaultOAuth2User(Collections.singleton(new SimpleGrantedAuthority(user.getRoleKey())),
                 attributes.getAttribute(),
                 attributes.getNameAttributeKey());
-
     }
 
     //@param : 유저 생성 및 수정 서비스 로직

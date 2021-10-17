@@ -33,6 +33,11 @@ public class GlobalExceptionHandler {
 
             case "404":
                 log.error("404 Not Found Error", e);
+                errorCode = ErrorCode.NOT_FOUND;
+                return new ResponseEntity<>(ErrorResponse.res(errorCode.getMsg()), errorCode.getHttpStatus());
+
+            case "404_NO_DATA":
+                log.error("404 Not Found Error", e);
                 errorCode = ErrorCode.NO_DATA;
                 return new ResponseEntity<>(ErrorResponse.res(errorCode.getMsg()), errorCode.getHttpStatus());
 
