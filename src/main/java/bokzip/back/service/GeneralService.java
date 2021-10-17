@@ -19,16 +19,14 @@ public class GeneralService {
     }
 
     public Optional<General> findById(Long id) {
-        if (id >= 100 || id < 0)
+        if (id >= 100 || id < 0) {
             throw new RuntimeException("404");
-
+        }
         return generalRepository.findById(id);
     }
 
-
     public List<GeneralMapping> findAll() {
         return generalRepository.findAllBy(Sort.by(Sort.Direction.ASC, "id"));
-
     }
 
     public List<GeneralMapping> StarfindAll() {
@@ -41,12 +39,12 @@ public class GeneralService {
     }
 
     public void addGeneralView(Long id) {
-        if (id >= 100 || id <= 0)
+        if (id >= 100 || id <= 0) {
             throw new RuntimeException("404");
-
-        Optional<General> general = generalRepository.findById(id);
-        Integer viewCount = general.get().getViewCount();
-        general.get().setViewCount(++viewCount);
-        generalRepository.save(general.get());
+        }
+        General general = generalRepository.findById(id).orElseThrow(() -> new RuntimeException("404"));
+        Integer viewCount = general.getViewCount();
+        general.setViewCount(++viewCount);
+        generalRepository.save(general);
     }
 }

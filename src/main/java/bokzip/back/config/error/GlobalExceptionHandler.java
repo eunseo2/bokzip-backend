@@ -15,7 +15,6 @@ public class GlobalExceptionHandler {
     /**
      * @see : @ExceptionHandler : 특정 Exception을 지정해서 별도로 처리해줌
      */
-
     @ExceptionHandler(RuntimeException.class)
     public static ResponseEntity errorhandler(RuntimeException e){
         ErrorCode errorCode;

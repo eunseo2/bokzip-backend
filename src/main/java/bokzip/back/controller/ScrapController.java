@@ -2,9 +2,7 @@ package bokzip.back.controller;
 
 import bokzip.back.config.response.SuccessResponse;
 import bokzip.back.dto.ScrapType;
-import bokzip.back.domain.User;
 import bokzip.back.dto.ScrapMapping;
-import bokzip.back.dto.UserDto;
 import bokzip.back.service.ScrapService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
