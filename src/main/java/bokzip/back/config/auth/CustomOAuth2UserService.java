@@ -39,14 +39,14 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
 
         //@param : OAuth2 로그인 진행 시 key가 되는 필드 값
         String userNameAttributeName = userRequest.getClientRegistration().getProviderDetails()
-                                        .getUserInfoEndpoint().getUserNameAttributeName();
+                .getUserInfoEndpoint().getUserNameAttributeName();
 
         //@param : OAuth2UserService를 통해 가져온 OAuth2User의 attribute
         OAuthAttributes attributes = OAuthAttributes.of(registrationId, userNameAttributeName, oAuth2User.getAttributes());
 
         //@param : 세션에 사용자 정보를 저장하기 위한 dto 클래스
         User user = saveOrUpdate(attributes);
-        httpSession.setAttribute("user", new UserDto()); // SessionUser (직렬화된 dto 클래스 사용)
+        httpSession.setAttribute("user", new UserDto(user)); // SessionUser (직렬화된 dto 클래스 사용)
 
         return new DefaultOAuth2User(Collections.singleton(new SimpleGrantedAuthority(user.getRoleKey())),
                 attributes.getAttribute(),
@@ -55,11 +55,10 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
     }
 
     //@param : 유저 생성 및 수정 서비스 로직
-    private User saveOrUpdate(OAuthAttributes attributes){
+    private User saveOrUpdate(OAuthAttributes attributes) {
         User user = userRepository.findByEmail(attributes.getEmail())
                 .map(entity -> entity.update(attributes.getName(), attributes.getProfile()))
                 .orElse(attributes.toEntity());
-        log.info(user.toString()); //@deprecated console 확인 용
         return userRepository.save(user);
     }
 }

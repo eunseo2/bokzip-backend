@@ -3,6 +3,7 @@ package bokzip.back.domain;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
 
@@ -11,6 +12,7 @@ import javax.persistence.*;
 @Getter
 @Setter
 @NoArgsConstructor
+@ToString
 public class Scrap {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,24 +25,24 @@ public class Scrap {
      * scrap(1) : users(n) / posts(n)
      */
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "general_id")
     private General general;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "post_id")
     private Post post;
 
-    public Scrap(User user, General general) {
+    public void updateGeneral(User user, General general) {
         this.user = user;
         this.general = general;
     }
 
-    public Scrap(User user, Post post) {
+    public void updatePost(User user, Post post) {
         this.user = user;
         this.post = post;
     }

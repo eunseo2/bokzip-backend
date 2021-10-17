@@ -26,22 +26,26 @@ dependencies {
 	// OAuth 2.0 사용을 위한 Spring Security (Spring Boot 2방식)
 	implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
 
-	//JWT
-	implementation 'io.jsonwebtoken:jjwt-api:0.11.2'
-	implementation 'io.jsonwebtoken:jjwt-jackson:0.11.2'
-	runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.11.2'
-
 	// Lombok
 	compileOnly 'org.projectlombok:lombok:1.18.20'
 	annotationProcessor 'org.projectlombok:lombok:1.18.20'
 	testCompileOnly 'org.projectlombok:lombok:1.18.20'
 	testAnnotationProcessor 'org.projectlombok:lombok:1.18.20'
 
-	//runtimeOnly 'org.postgresql:postgresql'
 	runtimeOnly 'mysql:mysql-connector-java'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.springframework.security:spring-security-test'
 
+}
+
+//bootJar를 활성화 시키기 위해 jar는 enabled를 false로 줌
+tasks.jar {
+	enabled = false
+}
+tasks.bootJar {
+	enabled = true
+	archiveClassifier.set("boot")
+	mainClassName = "bokzip.back.BackApplication"
 }
 
 test {

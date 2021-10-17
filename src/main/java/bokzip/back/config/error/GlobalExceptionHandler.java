@@ -1,5 +1,6 @@
-package bokzip.back.config;
+package bokzip.back.config.error;
 
+import bokzip.back.config.response.ErrorResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -19,19 +20,15 @@ public class GlobalExceptionHandler {
     public static ResponseEntity errorhandler(RuntimeException e){
         ErrorCode errorCode;
         switch (e.getMessage()){
+
             case "400" :
                 log.error("400 Bad Request", e);
                 errorCode = ErrorCode.INVALID_VALUE;
                 return new ResponseEntity<>(ErrorResponse.res(errorCode.getMsg()), errorCode.getHttpStatus());
 
-            case "401" :
-                log.error("401 UnAuthorized", e);
-                errorCode = ErrorCode.UNAUTHORIZED;
-                return new ResponseEntity<>(ErrorResponse.res(errorCode.getMsg()), errorCode.getHttpStatus());
-
-            case "403":
-                log.error("403 Forbidden", e);
-                errorCode = ErrorCode.FORBIDDEN;
+            case "401":
+                log.error("401 Unauthorized Error", e);
+                errorCode = ErrorCode.UN_AUTHORIZED;
                 return new ResponseEntity<>(ErrorResponse.res(errorCode.getMsg()), errorCode.getHttpStatus());
 
             case "404":
