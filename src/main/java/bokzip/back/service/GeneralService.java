@@ -1,5 +1,7 @@
 package bokzip.back.service;
 
+import bokzip.back.config.error.ErrorCode;
+import bokzip.back.config.error.GeneralNotFoundException;
 import bokzip.back.domain.General;
 import bokzip.back.dto.GeneralMapping;
 
@@ -20,7 +22,7 @@ public class GeneralService {
 
     public Optional<General> findById(Long id) {
         if (id >= 100 || id < 0) {
-            throw new RuntimeException("404");
+            throw new GeneralNotFoundException(ErrorCode.NOT_FOUND);
         }
         return generalRepository.findById(id);
     }
@@ -40,9 +42,10 @@ public class GeneralService {
 
     public void addGeneralView(Long id) {
         if (id >= 100 || id <= 0) {
-            throw new RuntimeException("404");
+            throw new GeneralNotFoundException(ErrorCode.NOT_FOUND);
         }
-        General general = generalRepository.findById(id).orElseThrow(() -> new RuntimeException("404"));
+        General general = generalRepository.findById(id)
+                .orElseThrow(() -> new GeneralNotFoundException(ErrorCode.NOT_FOUND));
         Integer viewCount = general.getViewCount();
         general.setViewCount(++viewCount);
         generalRepository.save(general);

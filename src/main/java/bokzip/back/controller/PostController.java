@@ -1,5 +1,7 @@
 package bokzip.back.controller;
 
+import bokzip.back.config.error.ErrorCode;
+import bokzip.back.config.error.PostNotFoundException;
 import bokzip.back.domain.Post;
 import bokzip.back.dto.PostMapping;
 import bokzip.back.dto.SortType;
@@ -32,7 +34,7 @@ public class PostController {
     @GetMapping("/center/{id}")
     public Post addOneData(@PathVariable @Validated Long id) {
         Post post = postService.findId(id)
-                .orElseThrow(() -> new RuntimeException("404"));
+                .orElseThrow(() -> new PostNotFoundException(ErrorCode.NOT_FOUND));
         return post;
     }
 

@@ -1,5 +1,8 @@
 package bokzip.back.service;
 
+import bokzip.back.config.error.ErrorCode;
+import bokzip.back.config.error.InValidValueException;
+import bokzip.back.config.error.PostNotFoundException;
 import bokzip.back.domain.Post;
 import bokzip.back.dto.PostMapping;
 
@@ -25,7 +28,7 @@ public class PostService {
 
     public Optional<Post> findId(Long id) {
         if (id >= 1000 || id <= 0) {
-            throw new RuntimeException("404");
+            throw new PostNotFoundException(ErrorCode.NOT_FOUND);
         }
         return postRepository.findById(id);
     }
@@ -39,13 +42,13 @@ public class PostService {
         boolean isNumber = category.matches("^[0-9]*$");
         boolean isEnglish = category.matches("^[a-zA-Z]*$");
         if (isNumber || isEnglish) {
-            throw new RuntimeException("400");
+            throw new InValidValueException(ErrorCode.INVALID_VALUE);
         }
 
         req_category += category;
         List<PostMapping> result = postRepository.findByCategoryLike(req_category);
         if (result.isEmpty()) { //null 값 반환 방지
-            throw new RuntimeException("404");
+            throw new PostNotFoundException(ErrorCode.NOT_FOUND);
         }
         return result;
     }
@@ -55,7 +58,7 @@ public class PostService {
             throw new RuntimeException("404");
         }
         Post post = postRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("404"));
+                .orElseThrow(() -> new PostNotFoundException(ErrorCode.NOT_FOUND));
         Integer viewCount = post.getViewCount();
         post.setViewCount(++viewCount);
         postRepository.save(post);
@@ -66,7 +69,7 @@ public class PostService {
         boolean isEnglish = category.matches("^[a-zA-Z]*$");
         List<PostMapping> result;
         if (isNumber || isEnglish) {
-            throw new RuntimeException("400");
+            throw new InValidValueException(ErrorCode.INVALID_VALUE);
         }
         if (category.equals("전체")) {
             category = "지원";
@@ -80,7 +83,7 @@ public class PostService {
                 result = postRepository.findByCategoryContainsAndAreaContainsOrderByIdAsc(category, area);
         }
         if (result.isEmpty()) { //null 값 반환 방지
-            throw new RuntimeException("404");
+            throw new PostNotFoundException(ErrorCode.NOT_FOUND);
         }
         return result;
     }

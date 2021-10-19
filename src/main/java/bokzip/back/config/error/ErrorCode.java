@@ -16,9 +16,9 @@ public enum ErrorCode {
 
     NOT_FOUND(HttpStatus.NOT_FOUND, "요청 받은 리소스를 찾을 수 없습니다."),
 
-    NO_DATA(HttpStatus.NOT_FOUND, "스크랩이 존재하지 않습니다."),
-
     VALID_SCRAP(HttpStatus.CONFLICT, "이미 스크랩 했습니다."),
+
+    UNABLE_DELETE_SCRAP(HttpStatus.CONFLICT, "스크랩을 삭제할 수 없습니다."),
 
     SERVER_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "Bokzip 서버 에러입니다.");
 

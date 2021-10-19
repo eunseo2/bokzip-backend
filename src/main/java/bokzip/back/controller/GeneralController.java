@@ -1,5 +1,7 @@
 package bokzip.back.controller;
 
+import bokzip.back.config.error.ErrorCode;
+import bokzip.back.config.error.GeneralNotFoundException;
 import bokzip.back.domain.General;
 import bokzip.back.dto.GeneralMapping;
 import bokzip.back.service.GeneralService;
@@ -44,7 +46,7 @@ public class GeneralController {
     //@param : pk로 일반 데이터 조회
     @GetMapping("/general/{id}")
     public General findById(@PathVariable @Validated Long id) {
-        General general = generalService.findById(id).orElseThrow(() -> new RuntimeException("404"));
+        General general = generalService.findById(id).orElseThrow(() -> new GeneralNotFoundException(ErrorCode.NOT_FOUND));
         return general;
     }
 
