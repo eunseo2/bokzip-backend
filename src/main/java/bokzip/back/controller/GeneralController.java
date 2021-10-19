@@ -1,9 +1,9 @@
 package bokzip.back.controller;
 
+import bokzip.back.config.error.ErrorCode;
+import bokzip.back.config.error.GeneralNotFoundException;
 import bokzip.back.domain.General;
-
 import bokzip.back.dto.GeneralMapping;
-
 import bokzip.back.service.GeneralService;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
-import java.util.Optional;
 
 @RequestMapping("/post")
 @RestController
@@ -46,13 +45,8 @@ public class GeneralController {
 
     //@param : pk로 일반 데이터 조회
     @GetMapping("/general/{id}")
-    public Optional<General> findById(@PathVariable Long id) {
-
-        Optional<General> general = generalService.findById(id);
-
-        if (!general.isPresent())//null 값 반환 방지
-            throw new RuntimeException("404");
-
+    public General findById(@PathVariable @Validated Long id) {
+        General general = generalService.findById(id).orElseThrow(() -> new GeneralNotFoundException(ErrorCode.NOT_FOUND));
         return general;
     }
 

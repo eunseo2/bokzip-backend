@@ -1,60 +1,54 @@
 package bokzip.back.controller;
 
-import bokzip.back.config.ErrorResponse;
-import bokzip.back.config.SuccessResponse;
+import bokzip.back.config.response.SuccessResponse;
+import bokzip.back.dto.ScrapType;
 import bokzip.back.dto.ScrapMapping;
 import bokzip.back.service.ScrapService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
-@RequestMapping("/post")
+@RequestMapping("/scraps")
 @RestController
 public class ScrapController {
     private final ScrapService scrapService;
+    private final HttpSession httpSession;
 
-    public ScrapController(ScrapService scrapService) {
+    public ScrapController(ScrapService scrapService, HttpSession httpSession) {
         this.scrapService = scrapService;
+        this.httpSession = httpSession;
     }
 
-    @PostMapping("/center/{postId}")
+    @PostMapping("/centers/{postId}")
     public ResponseEntity addPostScrap(@PathVariable Long postId) {
-        scrapService.addPostScrap(postId);
+        scrapService.addScrap(postId, ScrapType.POST);
         return new ResponseEntity<>(SuccessResponse.res("스크랩 되었습니다."), HttpStatus.OK);
-//        return "스크랩 되었습니다.";
     }
 
-    @PostMapping("/general/{generalId}")
+    @PostMapping("/generals/{generalId}")
     public ResponseEntity addGeneralScrap(@PathVariable Long generalId) {
-        scrapService.addGeneralScrap(generalId);
+        scrapService.addScrap(generalId, ScrapType.GENERAL);
         return new ResponseEntity<>(SuccessResponse.res("스크랩 되었습니다."), HttpStatus.OK);
-//        return "스크랩 되었습니다.";
     }
 
-
-    @DeleteMapping("/center/{postId}")
+    @DeleteMapping("/centers/{postId}")
     public ResponseEntity deletePostScrap(@PathVariable Long postId) {
-        scrapService.deletePostScrap(postId);
+        scrapService.deleteScrap(postId, ScrapType.POST);
         return new ResponseEntity<>(SuccessResponse.res("스크랩 해제되었습니다."), HttpStatus.OK);
-//        return ResponseEntity.ok().body("스크랩 해제되었습니다.");
     }
 
-    @DeleteMapping("/general/{generalId}")
+    @DeleteMapping("/generals/{generalId}")
     public ResponseEntity deleteGeneralScrap(@PathVariable Long generalId) {
-        scrapService.deleteGeneralScrap(generalId);
+        scrapService.deleteScrap(generalId, ScrapType.GENERAL);
         return new ResponseEntity<>(SuccessResponse.res("스크랩 해제되었습니다."), HttpStatus.OK);
-//        return ResponseEntity.ok().body("스크랩 해제되었습니다.");
     }
 
-    @GetMapping("/scraps")
+    @GetMapping("")
     public List<ScrapMapping> scraps() {
-        List<ScrapMapping> scrap_list = scrapService.Scraps();
-
-        if(scrap_list.isEmpty())
-            throw new RuntimeException("404");
-
-        return scrap_list;
+        List<ScrapMapping> scraps = scrapService.displayScraps();
+        return scraps;
     }
 }

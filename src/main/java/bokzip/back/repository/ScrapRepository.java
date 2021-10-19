@@ -11,12 +11,9 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 import java.util.Optional;
 
-@Repository //DI
+@Repository
 public interface ScrapRepository extends JpaRepository<Scrap, Long> {
     Optional<Scrap> findByUserAndPost(User user, Post post);
-
     Optional<Scrap> findByUserAndGeneral(User user, General general);
-
     List<ScrapMapping> findByUser(User user);
-
 }

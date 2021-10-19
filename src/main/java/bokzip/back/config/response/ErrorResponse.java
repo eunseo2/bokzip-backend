@@ -1,4 +1,4 @@
-package bokzip.back.config;
+package bokzip.back.config.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
