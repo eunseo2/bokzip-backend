@@ -1,5 +1,7 @@
 package bokzip.back.service;
 
+import bokzip.back.config.error.ErrorCode;
+import bokzip.back.config.error.GeneralNotFoundException;
 import bokzip.back.domain.General;
 import bokzip.back.dto.GeneralMapping;
 
@@ -19,17 +21,14 @@ public class GeneralService {
     }
 
     public Optional<General> findById(Long id) {
-        //id가 null == 전체조회와 같음
-        if (id >= 100 || id < 0)
-            throw new RuntimeException("404");
-
+        if (id >= 100 || id < 0) {
+            throw new GeneralNotFoundException(ErrorCode.NOT_FOUND);
+        }
         return generalRepository.findById(id);
     }
 
-
     public List<GeneralMapping> findAll() {
         return generalRepository.findAllBy(Sort.by(Sort.Direction.ASC, "id"));
-
     }
 
     public List<GeneralMapping> StarfindAll() {
@@ -42,12 +41,13 @@ public class GeneralService {
     }
 
     public void addGeneralView(Long id) {
-        if (id >= 100 || id <= 0)
-            throw new RuntimeException("404");
-
-        Optional<General> general = generalRepository.findById(id);
-        Integer viewCount = general.get().getViewCount();
-        general.get().setViewCount(++viewCount);
-        generalRepository.save(general.get());
+        if (id >= 100 || id <= 0) {
+            throw new GeneralNotFoundException(ErrorCode.NOT_FOUND);
+        }
+        General general = generalRepository.findById(id)
+                .orElseThrow(() -> new GeneralNotFoundException(ErrorCode.NOT_FOUND));
+        Integer viewCount = general.getViewCount();
+        general.setViewCount(++viewCount);
+        generalRepository.save(general);
     }
 }

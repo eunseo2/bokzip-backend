@@ -1,4 +1,4 @@
-package bokzip.back.domain;
+package bokzip.back.dto;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

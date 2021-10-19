@@ -1,7 +1,7 @@
-package bokzip.back.config;
+package bokzip.back.config.auth;
 
 
-import bokzip.back.domain.Provider;
+import bokzip.back.dto.Provider;
 import bokzip.back.domain.User;
 import lombok.Builder;
 import lombok.Getter;

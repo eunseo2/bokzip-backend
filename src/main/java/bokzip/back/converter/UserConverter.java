@@ -1,4 +1,4 @@
-package bokzip.back.config;
+package bokzip.back.converter;
 
 import bokzip.back.domain.User;
 import bokzip.back.dto.UserDto;

@@ -1,4 +1,4 @@
-package bokzip.back.config;
+package bokzip.back.config.auth;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;
@@ -11,7 +11,6 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 @RequiredArgsConstructor
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private final CustomOAuth2UserService customOAuth2UserService;
-
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {

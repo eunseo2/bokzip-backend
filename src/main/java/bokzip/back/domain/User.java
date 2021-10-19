@@ -1,5 +1,6 @@
 package bokzip.back.domain;
 
+import bokzip.back.dto.Provider;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -55,9 +56,7 @@ public class User {
         this.profile = profile;
         return this;
     }
-
     public String getRoleKey() {
         return this.provider.getKey();
     }
-
 }

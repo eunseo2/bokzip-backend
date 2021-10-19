@@ -1,6 +1,5 @@
 package bokzip.back.dto;
 
-import bokzip.back.domain.Provider;
 import bokzip.back.domain.User;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
