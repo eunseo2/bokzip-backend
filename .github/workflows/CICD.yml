@@ -10,7 +10,7 @@ on:
     branches: [ main ]
 
 jobs:
-  build:
+  build_deploy:
     # 실행환경 세팅
     runs-on: ubuntu-latest
     
@@ -25,13 +25,8 @@ jobs:
       run: chmod +x gradlew
     - name: Build with Gradle
       run: ./gradlew clean build
-      
-  deploy:  
+ 
     # 빌드가 성공하면 heroku에 deploy
-    needs: build
-    runs-on: ubuntu-latest     
-    
-    steps:
     - name: Deploy to Heroku
       uses: AkhileshNS/heroku-deploy@v3.12.12
       with:
