@@ -24,7 +24,7 @@ public class ScrapController {
         this.httpSession = httpSession;
     }
 
-    @PostMapping("/centers/{postId}")
+    @GetMapping("/centers/{postId}")
     public ResponseEntity addPostScrap(@PathVariable Long postId) {
         UserDto user = (UserDto) httpSession.getAttribute("user");
         if (user == null) {
@@ -34,7 +34,7 @@ public class ScrapController {
         return new ResponseEntity<>(SuccessResponse.res("스크랩 되었습니다."), HttpStatus.OK);
     }
 
-    @PostMapping("/generals/{generalId}")
+    @GetMapping("/generals/{generalId}")
     public ResponseEntity addGeneralScrap(@PathVariable Long generalId) {
         UserDto user = (UserDto) httpSession.getAttribute("user");
         if (user == null) {
