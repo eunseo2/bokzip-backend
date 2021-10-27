@@ -37,6 +37,9 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.springframework.security:spring-security-test'
 
+
+	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+
 }
 
 //bootJar를 활성화 시키기 위해 jar는 enabled를 false로 줌
