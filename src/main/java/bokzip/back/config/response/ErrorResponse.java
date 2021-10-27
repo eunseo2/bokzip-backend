@@ -8,12 +8,19 @@ import lombok.Data;
 @AllArgsConstructor
 @Builder
 public class ErrorResponse<T> {
-    private String errorMessage;
+    private String message;
+    private Object data;
 
     // @param : Error Message를 전송할 때 사용
-    public static ErrorResponse res(final String errorMessage) {
+    public static ErrorResponse res(final String message) {
         return ErrorResponse.builder()
-                .errorMessage(errorMessage)
+                .message(message)
+                .build();
+    }
+    public static ErrorResponse res2(final String message, final Object data) {
+        return ErrorResponse.builder()
+                .message(message)
+                .data(data)
                 .build();
     }
 }
