@@ -12,7 +12,7 @@ public class UserController {
 
     @GetMapping("/")
     public String home(Model model, Authentication authentication) {
-        return "/index";
+        return "index";
     }
 
 }
