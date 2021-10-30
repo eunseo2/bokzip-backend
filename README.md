@@ -1,2 +1,18 @@
-# bokzip-backend
-bokzip backend repository
+# 복지를 위한 복지서비스, bokzip
+캡쳐본
+
+ㅇㄹ미ㅏ럼이민ㅇ 입니ㅏㄷ.
+### 시연영상 
+
+## 구성원
+
+## 개발환경
+
+## 핵심 기능
+
+## 📝 설계 문서
+### 1. API 
+
+### 2. DB
+
+### 3. Architecture
