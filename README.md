@@ -14,7 +14,7 @@
 ## :hammer: 개발환경
 - Develop
 ```
-- SpringBoot 2.5.3, 
+- SpringBoot 2.5.3, Spring Data JPA
 - PostgreSQL(배포 DB)
 - MySQL(테스트 DB)
 - Java 11
