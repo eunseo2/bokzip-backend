@@ -19,17 +19,12 @@ dependencies {
 	 * 		   complie는 A가 수정되면 의존하는 B,C도 모두 다시 빌드되어야 함
 	 * 		   implementation는 A 수정 시, 직접 의존하는 B만 다시 빌드 (속도 측면에서 유리)
 	 */
-
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'junit:junit:4.12'
 	implementation 'org.projectlombok:lombok:1.18.16'
 	// OAuth 2.0 사용을 위한 Spring Security (Spring Boot 2방식)
-//	implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
-	//JWT
-//	implementation 'io.jsonwebtoken:jjwt-api:0.11.2'
-//	implementation 'io.jsonwebtoken:jjwt-jackson:0.11.2'
-//	runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.11.2'
+	implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
 
 	// Lombok
 	compileOnly 'org.projectlombok:lombok:1.18.20'
@@ -37,11 +32,24 @@ dependencies {
 	testCompileOnly 'org.projectlombok:lombok:1.18.20'
 	testAnnotationProcessor 'org.projectlombok:lombok:1.18.20'
 
-	runtimeOnly 'mysql:mysql-connector-java'
+	//runtimeOnly 'mysql:mysql-connector-java'
+	runtimeOnly 'org.postgresql:postgresql'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.springframework.security:spring-security-test'
-	
 
+
+	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+
+}
+
+//bootJar를 활성화 시키기 위해 jar는 enabled를 false로 줌
+tasks.jar {
+	enabled = false
+}
+tasks.bootJar {
+	enabled = true
+	archiveClassifier.set("boot")
+	mainClassName = "bokzip.back.BackApplication"
 }
 
 test {
