@@ -50,7 +50,13 @@
 - [코드 컨벤션 및 커밋, 브랜치 규칙](https://github.com/bokzip/bokzip-backend/wiki)
 
 ### 1. API 
+https://documenter.getpostman.com/view/15573271/U16bvoS7
 
 ### 2. DB
+![image](https://user-images.githubusercontent.com/70589857/139565525-58298541-c5d3-4dac-9e4e-b5a3a24218f3.png)
 
 ### 3. Architecture
+![image](https://user-images.githubusercontent.com/70589857/139565578-0739efd0-6c2f-4147-b9fc-3f56280adbc2.png)
+
+## ✨ 프로젝트 관리
+![image](https://user-images.githubusercontent.com/70589857/139565972-7076d630-85bc-405b-a105-31d53fde11c2.png)
