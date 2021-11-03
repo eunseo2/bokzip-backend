@@ -1,10 +1,11 @@
 # :green_heart: 복지 가득한 집, bokzip :green_heart:
 접근성 있는 UI/UX 설계를 통해 앱을 이용하여 편리하게 복지 제도를 확인하고, 신청할 수 있도록 사이트로 연결해주는 모바일 어플리케이션
-> 개발기간 : 2021. 08. ~ 2021. 10.
+> **개발기간 : 2021. 08. ~ 2021. 10.**
 
-캡쳐본
+![image](https://user-images.githubusercontent.com/68772751/140019819-1c11ebd7-7e3c-4ffd-b44e-d08a9854216b.png)
 
 ### 시연영상 
+
 
 ## :monocle_face: 구성원
 |김은서|김혜정|
