@@ -47,8 +47,8 @@ public class ScrapController {
     }
 
     @GetMapping("")
-    public List<ScrapMapping> scraps() {
+    public ResponseEntity scraps() {
         List<ScrapMapping> scraps = scrapService.displayScraps();
-        return scraps;
+        return new ResponseEntity<>(SuccessResponse.res("스크랩 조회 성공했습니다.", scraps), HttpStatus.OK);
     }
 }

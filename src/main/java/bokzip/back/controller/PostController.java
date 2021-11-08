@@ -25,7 +25,6 @@ public class PostController {
 
     //@param : [중앙부처 + 로컬] 전체 데이터 조회
     @GetMapping("/centers")
-
     public List<PostMapping> selectAll() {
         return postService.findAll();
     }
@@ -42,13 +41,6 @@ public class PostController {
     @GetMapping("/center/view/{id}")
     public void addPostView(@PathVariable @Validated Long id) {
         postService.addPostView(id);
-    }
-
-    //@param : [중앙부처- 로그인전 둘러보기] category로 조회
-    @GetMapping("/center/category/{category}")
-    public List<PostMapping> getAllCategory(@PathVariable @Validated String category) {
-        List<PostMapping> categoryResult = postService.getListLikeCategory(category);
-        return categoryResult;
     }
 
     //@param : [중앙부처 + 로컬] 맞춤형 정보
