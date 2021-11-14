@@ -27,7 +27,7 @@ public class General {
 
     //이미지
     @Column(columnDefinition = "TEXT")
-    private String image;
+    private String thumbnail;
     //조회수
     @Column(name = "view_count", columnDefinition = "integer default 0")
     private Integer viewCount;
