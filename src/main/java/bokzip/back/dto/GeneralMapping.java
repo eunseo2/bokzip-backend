@@ -4,6 +4,6 @@ public interface GeneralMapping {
     Long getId();
     String getCategory();
     String getTitle();
-    String getImage();
+    String getThumbnail();
     Boolean getIsScrap();
 }
