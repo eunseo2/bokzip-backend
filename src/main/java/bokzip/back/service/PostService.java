@@ -77,8 +77,10 @@ public class PostService {
         switch (sort) {
             case viewCount:
                 result = postRepository.findByCategoryContainsAndAreaContainsOrderByViewCountDesc(category, area);
+                break;
             case starCount:
                 result = postRepository.findByCategoryContainsAndAreaContainsOrderByStarCountDesc(category, area);
+                break;
             default:
                 result = postRepository.findByCategoryContainsAndAreaContainsOrderByIdAsc(category, area);
         }
