@@ -18,7 +18,7 @@
 - SpringBoot 2.5.3, Spring Data JPA
 - PostgreSQL(배포 DB)
 - MySQL(테스트 DB)
-- Java 11
+- Java 8
 ```
 - DevOps
 ```
