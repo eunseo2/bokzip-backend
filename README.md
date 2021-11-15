@@ -50,7 +50,7 @@
 - [코드 컨벤션 및 커밋, 브랜치 규칙](https://github.com/bokzip/bokzip-backend/wiki)
 
 ### 1. API 
-https://documenter.getpostman.com/view/15573271/U16bvoS7
+- [Postman 문서 보러가기](https://documenter.getpostman.com/view/15573271/U16bvoS7)
 
 ### 2. DB
 ![image](https://user-images.githubusercontent.com/70589857/139565525-58298541-c5d3-4dac-9e4e-b5a3a24218f3.png)
