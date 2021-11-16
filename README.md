@@ -60,3 +60,6 @@
 
 ## ✨ 프로젝트 관리
 ![image](https://user-images.githubusercontent.com/70589857/139565972-7076d630-85bc-405b-a105-31d53fde11c2.png)
+
+---
+_heroku를 이용한 CICD는 [fork한 계정](https://github.com/hyejungg/bokzip-backend)에서 yml 파일 확인!_
