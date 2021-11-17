@@ -1,17 +1,13 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
-
-    <title>Login</title>
+    <meta charset="UTF-8"/>
+    <meta content="no-cache"/>
 </head>
 <body class="container-fluid">
-<h3>로그인을 성공하였습니다.</h3>
+<h1>복지 가득한 집</h1>
+<ul>
+    <li><a th:href="@{/logout}">로그아웃</a></li>
+</ul>
 </body>
 </html>
