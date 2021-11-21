@@ -54,6 +54,7 @@ public class ScrapService {
         return scrap;
     }
 
+    @Transactional
     public void deleteScrap(Long Id, ScrapType type) {
         User user = getSessionUser();
         if (type == ScrapType.POST) {
