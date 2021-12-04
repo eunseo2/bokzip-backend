@@ -4,8 +4,10 @@
 
 ![image](https://user-images.githubusercontent.com/68772751/140019819-1c11ebd7-7e3c-4ffd-b44e-d08a9854216b.png)
 
-### 시연영상 
-
+### 🎥 시연영상 
+|로그인 및 로그아웃|복지 조회 및 스크랩|필터|상세조회|
+|:---:|:---:|:---:|:---:|
+|![로그인 및 로그아웃](https://user-images.githubusercontent.com/68772751/144695048-c2a27c45-dc6b-41f5-8005-c86001539a06.gif)|![복지조회 및 스크랩](https://user-images.githubusercontent.com/68772751/144695322-c0d63d06-2462-4eba-937f-2aa18b3a1c63.gif)|![필터](https://user-images.githubusercontent.com/68772751/144695837-12077281-c8e1-4431-b0d0-88c3966f222f.gif)|![상세조회](https://user-images.githubusercontent.com/68772751/144695051-b1245fdc-8f96-4dfd-848f-a7dc9ea2532b.gif)|
 
 ## :monocle_face: 구성원
 |김은서|김혜정|
